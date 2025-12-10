@@ -1,284 +1,300 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>THa</title>
+  <title>THa | Takayuki Hayashi atelier</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-main: #222222;
+      --text-sub: #a0a0a0;
+    }
+
     * { margin:0; padding:0; box-sizing:border-box; }
 
     body {
-      font-family: "Inter", system-ui, sans-serif;
-      background:#fff;
-      color:#111;
-      letter-spacing:0.03em;
-      line-height:1.7;
+      font-family: "Inter", "Noto Sans JP", Helvetica, Arial, sans-serif;
+      background: var(--bg-color);
+      color: var(--text-main);
+      letter-spacing: 0.05em;
+      line-height: 1.8;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
     }
 
-    a { text-decoration:none; color:inherit; }
+    a { text-decoration:none; color:inherit; transition: opacity 0.3s; }
+    a:hover { opacity: 0.6; }
+    img { width: 100%; height: auto; display: block; vertical-align: bottom; }
 
-    html { scroll-behavior:smooth; }
-
-    /* Navigation */
+    /* Navigation (ロゴ) */
     .nav {
-      position:fixed;
-      top:18px;
-      left:0;
-      right:0;
-      display:flex;
-      justify-content:center;
-      gap:40px;
-      font-size:14px;
-      z-index:10;
-      background:rgba(255,255,255,0.85);
-      backdrop-filter:blur(10px);
-      padding:8px 0;
+      position: fixed;
+      top: 40px; left: 40px;
+      z-index: 100;
+    }
+    .nav-logo {
+      font-size: 18px; font-weight: 600; letter-spacing: 0.15em;
+      opacity: 0;
+      animation: fadeInFromTop 1s ease 0.5s forwards;
     }
 
-    /* Home */
-    header {
-      height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
+    /* Hero (トップページ: THaロゴのみ) */
+    .hero {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      /* 背景に微妙なテクスチャや色を入れても良い */
+      /* background: #fcfcfc; */
     }
 
-    .title {
-      font-size:64px;
-      font-weight:300;
-      letter-spacing:0.25em;
+    .hero-title-main {
+      font-size: clamp(80px, 15vw, 200px);
+      font-weight: 300;
+      line-height: 0.9;
+      letter-spacing: -0.05em;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1.2s ease 1s forwards;
     }
 
-    /* Sections */
-    section {
-      padding:96px 0;
+    /* Keyframe Animations */
+    @keyframes fadeInFromTop {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* スクロール時の画像アニメーションをよりスムーズに */
+    @keyframes imageScrollIn {
+      from { opacity: 0; transform: translateY(60px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .container {
-      max-width:960px;
-      margin:0 auto;
-      padding:0 24px;
+    /* Sections Common */
+    section { padding: 160px 80px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    
+    .section-label {
+      font-size: 10px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.25em;
+      margin-bottom: 120px;
+      color: var(--text-sub);
+      position: relative;
+    }
+    .section-label::after {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 1px;
+      background: #e0e0e0;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin-top: 10px;
     }
 
-    h2 {
-      font-size:13px;
-      letter-spacing:0.2em;
-      margin-bottom:32px;
-      font-weight:400;
-      text-transform:uppercase;
+    /* Works Main Image (セクションのトップに配置) */
+    .works-main-image-wrapper {
+      margin: 0 auto 100px auto;
+      max-width: 1000px;
+      cursor: pointer;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: all 0.5s ease;
+      animation: imageScrollIn 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+    }
+    .works-main-image-wrapper:hover {
+      opacity: 0.95;
+      transform: scale(0.98);
+    }
+    .works-main-image-wrapper img {
+      height: auto;
+    }
+    
+    /* Works Detail Layout */
+    .project-wrapper {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 120px;
+      align-items: start;
     }
 
-    /* About */
-    .about {
-      max-width:520px;
-      font-size:14px;
+    /* Sticky Info Column */
+    .project-info {
+      position: sticky;
+      top: 80px;
+      height: auto;
     }
 
-    .about p + p { margin-top:14px; }
+    .project-title { font-size: 20px; font-weight: 500; margin-bottom: 40px; line-height: 1.4; }
+    .project-title span { font-size: 13px; color: var(--text-sub); display: block; margin-top: 8px; font-weight: 400; }
 
-    /* Slider */
-    .project-title {
-      font-size:14px;
-      margin-bottom:12px;
+    .concept-text { font-size: 14px; margin-bottom: 60px; text-align: justify; color: #444; }
+    .concept-text p + p { margin-top: 20px; }
+
+    /* Spec Table */
+    .spec-table { font-size: 12px; border-top: 1px solid #eee; padding-top: 30px; }
+    .spec-row { display: grid; grid-template-columns: 100px 1fr; margin-bottom: 12px; }
+    .spec-dt { color: var(--text-sub); font-weight: 500;}
+
+    /* Image Gallery */
+    .project-gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 120px;
     }
 
-    .slider {
-      width:100%;
-      aspect-ratio:4/3;
-      border:1px solid #ddd;
-      overflow:hidden;
-      position:relative;
-      cursor:pointer;
-      margin-bottom:28px;
+    /* スクロール時の画像アニメーション */
+    .project-image {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .slider-track {
-      display:flex;
-      height:100%;
-      transition:transform 0.6s ease;
-    }
+    .project-image.visible { opacity: 1; transform: translateY(0); }
 
-    .slider-track img {
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      flex-shrink:0;
-    }
-
-    /* Info table */
-    .meta {
-      font-size:13px;
-      margin-bottom:36px;
-    }
-
-    .meta dt {
-      float:left;
-      width:160px;
-      color:#555;
-    }
-
-    .meta dd {
-      margin-left:160px;
-      margin-bottom:6px;
-    }
-
-    .meta::after { content:""; display:block; clear:both; }
-
-    /* Concept */
-    .concept-title {
-      font-size:12px;
-      letter-spacing:0.18em;
-      margin-bottom:12px;
-      text-transform:uppercase;
-    }
-
-    .concept {
-      font-size:13px;
-      max-width:760px;
-    }
-
-    .concept p + p { margin-top:16px; }
-
-    footer {
-      padding:40px 0;
-      text-align:center;
-      font-size:11px;
-      color:#777;
-    }
+    /* Footer */
+    footer { padding: 100px 80px 40px; text-align: center; font-size: 10px; color: var(--text-sub); border-top: 1px solid #f0f0f0; margin-top: 100px; letter-spacing: 0.1em; text-transform: uppercase;}
 
     /* Responsive */
-    @media (max-width:768px) {
-      .title { font-size:42px; }
-      section { padding:72px 0; }
-      .nav { gap:24px; font-size:13px; }
-      .meta dt { width:130px; }
-      .meta dd { margin-left:130px; }
+    @media (max-width: 900px) {
+      .nav { top: 24px; left: 24px; }
+      section { padding: 80px 24px; } 
+      .hero-title-main { font-size: 14vw; }
+      .about-content, .project-wrapper { grid-template-columns: 1fr; gap: 40px; }
+      .project-info { position: static; margin-bottom: 20px; }
+      .project-gallery { gap: 60px; }
+      .works-main-image-wrapper { margin-bottom: 60px; }
     }
   </style>
 </head>
 
 <body>
 
-<!-- Navigation -->
-<div class="nav">
-  <a href="#home">Home</a>
-  <a href="#about">About</a>
-  <a href="#works">Works</a>
-</div>
+  <nav class="nav">
+    <a href="#home" class="nav-logo">THa</a>
+  </nav>
 
-<!-- Home -->
-<header id="home">
-  <div class="title">THa</div>
-</header>
+  <header id="home" class="hero">
+    <h1 class="hero-title-main">THa</h1>
+  </header>
 
-<!-- About -->
-<section id="about">
-  <div class="container">
-    <h2>About</h2>
-    <div class="about">
-      <p>Takayuki Hayashi</p>
-      <p>
-        Completed the Master's Program in Human-Environment Studies,<br>
-        Department of Environmental Design, Kyushu University
-      </p>
-      <p>
-        Currently working at an architectural design office
-      </p>
-    </div>
-  </div>
-</section>
+  <section id="works">
+    <div class="container">
+      <h2 class="section-label">01 / Works</h2>
 
-<!-- Works -->
-<section id="works">
-  <div class="container">
-    <h2>Works</h2>
+      <a href="#project-detail" class="works-main-image-wrapper" id="worksMainImage">
+        <img src="S-1099.jpg" alt="Works Main Image: House in Itabashi Interior">
+      </a>
+      
+      <div id="project-detail" class="project-wrapper">
+        
+        <article class="project-info">
+          <h3 class="project-title">House in Itabashi<span>Renovation / Tokyo</span></h3>
 
-    <p class="project-title">■ House in Itabashi</p>
+          <div class="concept-text">
+            <p>During Japan’s economic bubble of the 1980s, condominium construction increased dramatically. Today, a 40-year-old condominium is often perceived as “old.” However, as the housing stock continues to grow, we must reconsider their value.</p>
+            <p>Rather than adopting a complete skeleton-and-infill approach that erases history, this renovation employs an upcycling strategy. By carefully assessing existing components and reinterpreting the "given," the project proposes a renewed architectural lifespan.</p>
+          </div>
 
-    <!-- Slider -->
-    <div class="slider" id="slider">
-      <div class="slider-track" id="sliderTrack">
-        <img src="L-1099.jpg">
-        <img src="L-1097.jpg">
-        <img src="L-1102.jpg">
-        <img src="L-1106.jpg">
-        <img src="L-1113.jpg">
-        <img src="L-1114.jpg">
-        <img src="L-1121.jpg">
-        <img src="L-1122.jpg">
-        <img src="L-1124.jpg">
-        <img src="L-1126.jpg">
-        <img src="L-1128.jpg">
-        <img src="L-1132.jpg">
-        <img src="L-1138.jpg">
-        <img src="L-1143.jpg">
-        <img src="L-1146.jpg">
-        <img src="L-1147.jpg">
-        <img src="L-1149.jpg">
-        <img src="L-1150.jpg">
-        <img src="L-1153.jpg">
-        <img src="L-1154.jpg">
-        <img src="L-1157.jpg">
-        <img src="L-1158.jpg">
-        <img src="L-1160.jpg">
-        <img src="L-1161.jpg">
-        <img src="L-1163.jpg">
-        <img src="L-1164.jpg">
-        <img src="L-1168.jpg">
-        <img src="L-1170.jpg">
-        <img src="L-1171.jpg">
-        <img src="L-1172.jpg">
-        <img src="L-1173.jpg">
-        <img src="L-1176.jpg">
-        <img src="L-1180.jpg">
-        <img src="L-1182.jpg">
+          <div class="spec-table">
+            <div class="spec-row"><span class="spec-dt">Location</span><span class="spec-dd">Itabashi-ku, Tokyo</span></div>
+            <div class="spec-row"><span class="spec-dt">Type</span><span class="spec-dd">Residence</span></div>
+            <div class="spec-row"><span class="spec-dt">Structure</span><span class="spec-dd">SRC</span></div>
+            <div class="spec-row"><span class="spec-dt">Area</span><span class="spec-dd">79.95 m²</span></div>
+            <div class="spec-row"><span class="spec-dt">Year</span><span class="spec-dd">2025</span></div>
+          </div>
+        </article>
+
+        <div class="project-gallery">
+          
+          <div class="project-image-container">
+            <img src="S-1121.jpg" class="project-image" loading="lazy" alt="Living room wide view">
+          </div>
+          <div class="project-image-container">
+            <img src="S-1114.jpg" class="project-image" loading="lazy" alt="View through wooden frame to kitchen">
+          </div>
+          <div class="project-image-container">
+            <img src="S-1106.jpg" class="project-image" loading="lazy" alt="Dining and kitchen area">
+          </div>
+          <div class="project-image-container">
+            <img src="S-1097.jpg" class="project-image" loading="lazy" alt="Stainless steel kitchen">
+          </div>
+          <div class="project-image-container">
+            <img src="S-1102.jpg" class="project-image" loading="lazy" alt="Kitchen sink detail and concrete wall">
+          </div>
+          <div class="project-image-container">
+            <img src="S-1113.jpg" class="project-image" loading="lazy" alt="Switch panel design on wooden partition">
+          </div>
+          <div class="project-image-container">
+            <img src="S-1182.jpg" class="project-image" loading="lazy" alt="Pipe and wooden base detail">
+          </div>
+          <div class="project-image-container">
+            <img src="S-1176.jpg" class="project-image" loading="lazy" alt="Window frame and wood trim detail">
+          </div>
+          <div class="project-image-container">
+            <img src="S-1180.jpg" class="project-image" loading="lazy" alt="Material junction detail, ceiling and wall">
+          </div>
+
+        </div>
       </div>
     </div>
+  </section>
 
-    <!-- Info -->
-    <dl class="meta">
-      <dt>Location</dt><dd>Itabashi-ku, Tokyo, Japan</dd>
-      <dt>Building Type</dt><dd>Condominium Unit</dd>
-      <dt>Structure</dt><dd>Steel Reinforced Concrete (SRC)</dd>
-      <dt>Floor Area</dt><dd>79.95 m²</dd>
-      <dt>Original Completion</dt><dd>February 1983</dd>
-      <dt>Renovation Completion</dt><dd>June 2025</dd>
-      <dt>Design & Supervision</dt><dd>Takayuki Hayashi</dd>
-      <dt>Contractor</dt><dd>Suiga Co., Ltd.</dd>
-      <dt>Photography</dt><dd>Takuro Kunitomo</dd>
-    </dl>
-
-    <!-- Concept -->
-    <div class="concept-title">Concept</div>
-    <div class="concept">
-      <p>During Japan’s economic bubble of the 1980s, condominium construction increased dramatically...</p>
-      <p>Today, a 40-year-old condominium is often perceived as “old.” However, as the stock continues to grow...</p>
-      <p>Rather than adopting a complete skeleton-and-infill approach, this renovation employs an upcycling strategy...</p>
-      <p>By reinterpreting the given rather than replacing it, the project proposes a renewed architectural lifespan.</p>
+  <section id="about">
+    <div class="container">
+      <h2 class="section-label">02 / Profile</h2>
+      <div class="about-content">
+        <div class="about-name">Takayuki Hayashi</div>
+        <div class="about-text">
+          <p>Completed the Master's Program in Human-Environment Studies, Department of Environmental Design, Kyushu University.</p>
+          <p>Currently based in Tokyo, focusing on architectural renovation and spatial design that respects the context of existing structures while introducing new values. We seek essential and timeless solutions for living environments.</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-  </div>
-</section>
+  <footer>
+    <p>&copy; THa / Takayuki Hayashi atelier</p>
+  </footer>
 
-<footer>© THa</footer>
+  <script>
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1 // 画像が10%見えたら表示開始
+    };
 
-<script>
-let i=0;
-const track=document.getElementById("sliderTrack");
-const slides=track.children.length;
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
 
-setInterval(()=>{
-  i=(i+1)%slides;
-  track.style.transform=`translateX(-${i*100}%)`;
-},5000);
-
-document.getElementById("slider").onclick=()=>{
-  i=(i+1)%slides;
-  track.style.transform=`translateX(-${i*100}%)`;
-};
-</script>
+    // Worksギャラリー画像にアニメーションを適用
+    document.querySelectorAll('.project-image').forEach(img => {
+      observer.observe(img);
+    });
+    
+    // メイン画像クリックでWorks詳細セクションにスムーズスクロール
+    document.getElementById('worksMainImage').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('project-detail').scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
 
 </body>
 </html>
