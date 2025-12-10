@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>THa | Takayuki Hayashi atelier</title>
+  <title>THa | atelier</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
 
@@ -11,6 +11,8 @@
       --bg-color: #ffffff;
       --text-main: #222222;
       --text-sub: #a0a0a0;
+      --border-color: #e0e0e0;
+      --padding-x: 80px; /* 全体の左右余白 */
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
@@ -29,37 +31,33 @@
     a:hover { opacity: 0.6; }
     img { width: 100%; height: auto; display: block; vertical-align: bottom; }
 
-    /* Navigation (ロゴ) */
+    /* Navigation (ロゴとリンク) */
     .nav {
       position: fixed;
-      top: 40px; left: 40px;
-      z-index: 100;
-    }
-    .nav-logo {
-      font-size: 18px; font-weight: 600; letter-spacing: 0.15em;
+      top: 40px; left: var(--padding-x); right: var(--padding-x);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       opacity: 0;
       animation: fadeInFromTop 1s ease 0.5s forwards;
     }
+    .nav-logo {
+      font-size: 18px; font-weight: 600; letter-spacing: 0.15em;
+    }
+    .nav-links {
+      display: flex; gap: 32px;
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em;
+      color: var(--text-sub);
+    }
 
-    /* Hero (トップページ: THaロゴのみ) */
+    /* Hero (トップ画面: 巨大な余白とナビゲーションのみ) */
     .hero {
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
-      /* 背景に微妙なテクスチャや色を入れても良い */
-      /* background: #fcfcfc; */
-    }
-
-    .hero-title-main {
-      font-size: clamp(80px, 15vw, 200px);
-      font-weight: 300;
-      line-height: 0.9;
-      letter-spacing: -0.05em;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 1.2s ease 1s forwards;
+      /* 意図的に空にして余白をデザインとして使う */
     }
 
     /* Keyframe Animations */
@@ -68,23 +66,19 @@
       to { opacity: 1; transform: translateY(0); }
     }
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    /* スクロール時の画像アニメーションをよりスムーズに */
-    @keyframes imageScrollIn {
-      from { opacity: 0; transform: translateY(60px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
+    
     /* Sections Common */
-    section { padding: 160px 80px; }
-    .container { max-width: 1200px; margin: 0 auto; }
+    section { padding: 0 var(--padding-x); } /* 左右余白は固定、上下余白はコンテンツ内に統合 */
+    .container { max-width: 1400px; margin: 0 auto; }
     
     .section-label {
       font-size: 10px; font-weight: 600; text-transform: uppercase;
       letter-spacing: 0.25em;
-      margin-bottom: 120px;
+      margin-bottom: 60px; /* 作品リストとの間に余白 */
+      padding-top: 160px; /* セクションの開始余白 */
       color: var(--text-sub);
       position: relative;
     }
@@ -93,7 +87,7 @@
       display: block;
       width: 50px;
       height: 1px;
-      background: #e0e0e0;
+      background: var(--border-color);
       position: absolute;
       top: 100%;
       left: 0;
@@ -103,25 +97,23 @@
     /* Works Main Image (セクションのトップに配置) */
     .works-main-image-wrapper {
       margin: 0 auto 100px auto;
-      max-width: 1000px;
-      cursor: pointer;
+      max-width: 1200px;
       opacity: 0;
-      transform: scale(0.95);
-      transition: all 0.5s ease;
-      animation: imageScrollIn 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+      transform: translateY(30px);
+      animation: fadeInUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.2s forwards;
+      transition: opacity 0.5s, transform 0.5s;
     }
     .works-main-image-wrapper:hover {
       opacity: 0.95;
-      transform: scale(0.98);
     }
     .works-main-image-wrapper img {
-      height: auto;
+      cursor: pointer; /* クリック可能を示す */
     }
     
     /* Works Detail Layout */
     .project-wrapper {
       display: grid;
-      grid-template-columns: 320px 1fr;
+      grid-template-columns: 350px 1fr; /* 左側の解説スペースを広く */
       gap: 120px;
       align-items: start;
     }
@@ -129,26 +121,29 @@
     /* Sticky Info Column */
     .project-info {
       position: sticky;
-      top: 80px;
+      top: 100px; /* ナビゲーションより下に固定 */
       height: auto;
+      opacity: 0;
+      animation: fadeInUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
     }
 
-    .project-title { font-size: 20px; font-weight: 500; margin-bottom: 40px; line-height: 1.4; }
+    .project-title { font-size: 22px; font-weight: 500; margin-bottom: 40px; line-height: 1.4; }
     .project-title span { font-size: 13px; color: var(--text-sub); display: block; margin-top: 8px; font-weight: 400; }
 
     .concept-text { font-size: 14px; margin-bottom: 60px; text-align: justify; color: #444; }
     .concept-text p + p { margin-top: 20px; }
 
     /* Spec Table */
-    .spec-table { font-size: 12px; border-top: 1px solid #eee; padding-top: 30px; }
-    .spec-row { display: grid; grid-template-columns: 100px 1fr; margin-bottom: 12px; }
+    .spec-table { font-size: 12px; border-top: 1px solid var(--border-color); padding-top: 30px; }
+    .spec-row { display: grid; grid-template-columns: 120px 1fr; margin-bottom: 12px; }
     .spec-dt { color: var(--text-sub); font-weight: 500;}
 
     /* Image Gallery */
     .project-gallery {
       display: flex;
       flex-direction: column;
-      gap: 120px;
+      gap: 140px; /* 画像間の余白を最大化 */
+      padding-bottom: 160px; /* セクション終了の余白 */
     }
 
     /* スクロール時の画像アニメーション */
@@ -157,24 +152,47 @@
       height: auto;
       object-fit: cover;
       opacity: 0;
-      transform: translateY(60px);
+      transform: translateY(80px); /* 大きく動かす */
       transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .project-image.visible { opacity: 1; transform: translateY(0); }
 
+    /* About Section */
+    #about { padding: 0 var(--padding-x); }
+    .about-content { 
+      display: grid; 
+      grid-template-columns: 1fr 2fr; 
+      gap: 120px; /* 余白を大きく */
+      padding-bottom: 160px; /* セクション終了の余白 */
+    }
+    .about-name { font-size: 28px; font-weight: 300; margin-bottom: 24px;}
+    .about-text p { margin-bottom: 20px; max-width: 700px; text-align: justify; color: #555; }
+
+
     /* Footer */
-    footer { padding: 100px 80px 40px; text-align: center; font-size: 10px; color: var(--text-sub); border-top: 1px solid #f0f0f0; margin-top: 100px; letter-spacing: 0.1em; text-transform: uppercase;}
+    footer { 
+      padding: 60px var(--padding-x); 
+      text-align: center; 
+      font-size: 10px; 
+      color: var(--text-sub); 
+      border-top: 1px solid var(--border-color); 
+      letter-spacing: 0.1em; 
+      text-transform: uppercase;
+    }
 
     /* Responsive */
     @media (max-width: 900px) {
-      .nav { top: 24px; left: 24px; }
-      section { padding: 80px 24px; } 
-      .hero-title-main { font-size: 14vw; }
-      .about-content, .project-wrapper { grid-template-columns: 1fr; gap: 40px; }
+      :root { --padding-x: 24px; }
+      .nav { top: 24px; left: var(--padding-x); right: var(--padding-x); }
+      .nav-links { display: none; }
+      .section-label { padding-top: 100px; margin-bottom: 40px; }
+      
+      .project-wrapper, .about-content { grid-template-columns: 1fr; gap: 40px; }
       .project-info { position: static; margin-bottom: 20px; }
-      .project-gallery { gap: 60px; }
+      .project-gallery { gap: 80px; padding-bottom: 100px; }
       .works-main-image-wrapper { margin-bottom: 60px; }
+      #about .about-content { padding-bottom: 100px; }
     }
   </style>
 </head>
@@ -183,11 +201,13 @@
 
   <nav class="nav">
     <a href="#home" class="nav-logo">THa</a>
+    <div class="nav-links">
+      <a href="#works">Works</a>
+      <a href="#about">About</a>
+    </div>
   </nav>
 
-  <header id="home" class="hero">
-    <h1 class="hero-title-main">THa</h1>
-  </header>
+  <header id="home" class="hero"></header>
 
   <section id="works">
     <div class="container">
