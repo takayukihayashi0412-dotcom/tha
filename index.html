@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>THa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background:#fff;
+      color:#111;
+      letter-spacing:0.03em;
+      line-height:1.7;
+    }
+
+    a { text-decoration:none; color:inherit; }
+
+    html { scroll-behavior:smooth; }
+
+    /* Navigation */
+    .nav {
+      position:fixed;
+      top:18px;
+      left:0;
+      right:0;
+      display:flex;
+      justify-content:center;
+      gap:40px;
+      font-size:14px;
+      z-index:10;
+      background:rgba(255,255,255,0.85);
+      backdrop-filter:blur(10px);
+      padding:8px 0;
+    }
+
+    /* Home */
+    header {
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .title {
+      font-size:64px;
+      font-weight:300;
+      letter-spacing:0.25em;
+    }
+
+    /* Sections */
+    section {
+      padding:96px 0;
+    }
+
+    .container {
+      max-width:960px;
+      margin:0 auto;
+      padding:0 24px;
+    }
+
+    h2 {
+      font-size:13px;
+      letter-spacing:0.2em;
+      margin-bottom:32px;
+      font-weight:400;
+      text-transform:uppercase;
+    }
+
+    /* About */
+    .about {
+      max-width:520px;
+      font-size:14px;
+    }
+
+    .about p + p { margin-top:14px; }
+
+    /* Slider */
+    .project-title {
+      font-size:14px;
+      margin-bottom:12px;
+    }
+
+    .slider {
+      width:100%;
+      aspect-ratio:4/3;
+      border:1px solid #ddd;
+      overflow:hidden;
+      position:relative;
+      cursor:pointer;
+      margin-bottom:28px;
+    }
+
+    .slider-track {
+      display:flex;
+      height:100%;
+      transition:transform 0.6s ease;
+    }
+
+    .slider-track img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      flex-shrink:0;
+    }
+
+    /* Info table */
+    .meta {
+      font-size:13px;
+      margin-bottom:36px;
+    }
+
+    .meta dt {
+      float:left;
+      width:160px;
+      color:#555;
+    }
+
+    .meta dd {
+      margin-left:160px;
+      margin-bottom:6px;
+    }
+
+    .meta::after { content:""; display:block; clear:both; }
+
+    /* Concept */
+    .concept-title {
+      font-size:12px;
+      letter-spacing:0.18em;
+      margin-bottom:12px;
+      text-transform:uppercase;
+    }
+
+    .concept {
+      font-size:13px;
+      max-width:760px;
+    }
+
+    .concept p + p { margin-top:16px; }
+
+    footer {
+      padding:40px 0;
+      text-align:center;
+      font-size:11px;
+      color:#777;
+    }
+
+    /* Responsive */
+    @media (max-width:768px) {
+      .title { font-size:42px; }
+      section { padding:72px 0; }
+      .nav { gap:24px; font-size:13px; }
+      .meta dt { width:130px; }
+      .meta dd { margin-left:130px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<div class="nav">
+  <a href="#home">Home</a>
+  <a href="#about">About</a>
+  <a href="#works">Works</a>
+</div>
+
+<!-- Home -->
+<header id="home">
+  <div class="title">THa</div>
+</header>
+
+<!-- About -->
+<section id="about">
+  <div class="container">
+    <h2>About</h2>
+    <div class="about">
+      <p>Takayuki Hayashi</p>
+      <p>
+        Completed the Master's Program in Human-Environment Studies,<br>
+        Department of Environmental Design, Kyushu University
+      </p>
+      <p>
+        Currently working at an architectural design office
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Works -->
+<section id="works">
+  <div class="container">
+    <h2>Works</h2>
+
+    <p class="project-title">■ House in Itabashi</p>
+
+    <!-- Slider -->
+    <div class="slider" id="slider">
+      <div class="slider-track" id="sliderTrack">
+        <img src="L-1099.jpg">
+        <img src="L-1097.jpg">
+        <img src="L-1102.jpg">
+        <img src="L-1106.jpg">
+        <img src="L-1113.jpg">
+        <img src="L-1114.jpg">
+        <img src="L-1121.jpg">
+        <img src="L-1122.jpg">
+        <img src="L-1124.jpg">
+        <img src="L-1126.jpg">
+        <img src="L-1128.jpg">
+        <img src="L-1132.jpg">
+        <img src="L-1138.jpg">
+        <img src="L-1143.jpg">
+        <img src="L-1146.jpg">
+        <img src="L-1147.jpg">
+        <img src="L-1149.jpg">
+        <img src="L-1150.jpg">
+        <img src="L-1153.jpg">
+        <img src="L-1154.jpg">
+        <img src="L-1157.jpg">
+        <img src="L-1158.jpg">
+        <img src="L-1160.jpg">
+        <img src="L-1161.jpg">
+        <img src="L-1163.jpg">
+        <img src="L-1164.jpg">
+        <img src="L-1168.jpg">
+        <img src="L-1170.jpg">
+        <img src="L-1171.jpg">
+        <img src="L-1172.jpg">
+        <img src="L-1173.jpg">
+        <img src="L-1176.jpg">
+        <img src="L-1180.jpg">
+        <img src="L-1182.jpg">
+      </div>
+    </div>
+
+    <!-- Info -->
+    <dl class="meta">
+      <dt>Location</dt><dd>Itabashi-ku, Tokyo, Japan</dd>
+      <dt>Building Type</dt><dd>Condominium Unit</dd>
+      <dt>Structure</dt><dd>Steel Reinforced Concrete (SRC)</dd>
+      <dt>Floor Area</dt><dd>79.95 m²</dd>
+      <dt>Original Completion</dt><dd>February 1983</dd>
+      <dt>Renovation Completion</dt><dd>June 2025</dd>
+      <dt>Design & Supervision</dt><dd>Takayuki Hayashi</dd>
+      <dt>Contractor</dt><dd>Suiga Co., Ltd.</dd>
+      <dt>Photography</dt><dd>Takuro Kunitomo</dd>
+    </dl>
+
+    <!-- Concept -->
+    <div class="concept-title">Concept</div>
+    <div class="concept">
+      <p>During Japan’s economic bubble of the 1980s, condominium construction increased dramatically...</p>
+      <p>Today, a 40-year-old condominium is often perceived as “old.” However, as the stock continues to grow...</p>
+      <p>Rather than adopting a complete skeleton-and-infill approach, this renovation employs an upcycling strategy...</p>
+      <p>By reinterpreting the given rather than replacing it, the project proposes a renewed architectural lifespan.</p>
+    </div>
+
+  </div>
+</section>
+
+<footer>© THa</footer>
+
+<script>
+let i=0;
+const track=document.getElementById("sliderTrack");
+const slides=track.children.length;
+
+setInterval(()=>{
+  i=(i+1)%slides;
+  track.style.transform=`translateX(-${i*100}%)`;
+},5000);
+
+document.getElementById("slider").onclick=()=>{
+  i=(i+1)%slides;
+  track.style.transform=`translateX(-${i*100}%)`;
+};
+</script>
+
+</body>
+</html>
