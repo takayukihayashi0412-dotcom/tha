@@ -13,210 +13,217 @@
 
     body {
       font-family:"Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:#111111;
-      color:#f5f5f5;
+      background:#f5f5f5;
+      color:#111;
       line-height:1.7;
       letter-spacing:0.03em;
     }
 
     a { color:inherit; text-decoration:none; }
 
-    /* ---------- Layout ---------- */
-    .page-shell {
+    /* ---------- Shell ---------- */
+    .page {
       max-width:1200px;
       margin:0 auto;
-      padding:0 24px 80px;
+      padding:32px 32px 80px;
     }
 
-    section {
-      padding:80px 0;
-    }
+    section { padding:72px 0; }
 
-    h2.section-title {
-      font-size:13px;
-      font-weight:500;
-      letter-spacing:0.18em;
+    h2.section-label {
+      font-size:12px;
+      letter-spacing:0.22em;
       text-transform:uppercase;
-      margin-bottom:32px;
-      color:#bbbbbb;
+      color:#999;
+      margin-bottom:24px;
     }
 
     /* ---------- Header / Nav ---------- */
+    .header-row {
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      margin-bottom:32px;
+      border-bottom:1px solid #ddd;
+      padding-bottom:12px;
+    }
+
+    .logo {
+      font-size:18px;
+      letter-spacing:0.32em;
+      /* a は小文字のまま表示したいので text-transform は使わない */
+    }
+
     .nav {
-      position:fixed;
-      top:18px;
-      left:0;
-      right:0;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:0 32px;
-      z-index:20;
-      pointer-events:none;
-    }
-
-    .nav-inner {
-      width:100%;
-      max-width:1200px;
-      margin:0 auto;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      pointer-events:auto;
-      background:rgba(10,10,10,0.7);
-      backdrop-filter:blur(14px);
-      border-radius:999px;
-      padding:10px 18px;
-      border:1px solid rgba(255,255,255,0.08);
-    }
-
-    .brand {
-      font-size:14px;
-      letter-spacing:0.18em;
-      /* text-transform は消して THa の a を小文字表示 */
-    }
-
-    .nav-links {
       display:flex;
       gap:24px;
-      font-size:13px;
-      letter-spacing:0.16em;
+      font-size:12px;
+      letter-spacing:0.18em;
       text-transform:uppercase;
     }
 
-    .nav-links a {
+    .nav a {
       position:relative;
       padding-bottom:2px;
     }
-    .nav-links a::after {
+    .nav a::after {
       content:"";
       position:absolute;
       left:0;
       bottom:0;
       width:0;
       height:1px;
-      background:#ffffff;
+      background:#111;
       transition:width 0.2s ease;
-      opacity:0.7;
     }
-    .nav-links a:hover::after {
+    .nav a:hover::after {
       width:100%;
     }
 
     /* ---------- Hero ---------- */
     .hero {
-      position:relative;
-      height:100vh;
-      min-height:540px;
-      display:flex;
-      align-items:flex-end;
-      justify-content:center;
+      display:grid;
+      grid-template-columns:minmax(0,3fr) minmax(0,2fr);
+      gap:32px;
+      align-items:stretch;
+    }
+
+    .hero-image {
+      border-radius:20px;
       overflow:hidden;
-      color:#f5f5f5;
+      background:#ccc;
     }
 
-    .hero-bg {
-      position:absolute;
-      inset:0;
-      background:url("S-1099.jpg") center center / cover no-repeat;
-      filter:grayscale(40%);
-      transform:scale(1.02);
-    }
-
-    .hero-overlay {
-      position:absolute;
-      inset:0;
-      background:radial-gradient(circle at 20% 0%, rgba(255,255,255,0.08), transparent 50%),
-                 linear-gradient(to bottom, rgba(0,0,0,0.65), #050505 70%);
-    }
-
-    .hero-inner {
+    .hero-image-inner {
       position:relative;
-      z-index:1;
       width:100%;
-      max-width:1200px;
-      padding:120px 24px 72px;
+      padding-top:65%;
+      overflow:hidden;
+    }
+
+    .hero-image-inner img {
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .hero-info {
       display:flex;
       flex-direction:column;
-      gap:24px;
+      justify-content:space-between;
+      padding:8px 0;
     }
 
-    .hero-main {
-      display:flex;
-      justify-content:flex-start;
-      align-items:flex-end;
+    .hero-title-block {
+      margin-bottom:24px;
+    }
+
+    .hero-kicker {
+      font-size:11px;
+      letter-spacing:0.2em;
+      text-transform:uppercase;
+      color:#777;
+      margin-bottom:10px;
     }
 
     .hero-title {
-      font-size:64px;
-      letter-spacing:0.28em;
-      font-weight:300;
-      /* ここも大文字化を消す */
-      /* text-transform:uppercase; */
+      font-size:40px;
+      font-weight:400;
+      letter-spacing:0.32em;
+    }
+
+    .hero-sub {
+      font-size:13px;
+      color:#555;
+      margin-top:20px;
+      max-width:320px;
+    }
+
+    .hero-meta {
+      font-size:11px;
+      color:#777;
     }
 
     /* ---------- About ---------- */
-    .about-card {
-      background:#151515;
-      border-radius:24px;
-      padding:32px 28px 36px;
-      border:1px solid #262626;
-      box-shadow:0 26px 60px rgba(0,0,0,0.7);
-      max-width:540px;
+    .about-grid {
+      display:grid;
+      grid-template-columns:minmax(0,1.8fr) minmax(0,2.4fr);
+      gap:40px;
     }
 
     .about-name {
       font-size:18px;
       font-weight:500;
-      margin-bottom:8px;
+      margin-bottom:6px;
     }
 
     .about-role {
       font-size:13px;
-      color:#c3c3c3;
-      margin-bottom:20px;
+      color:#666;
+      margin-bottom:18px;
     }
 
     .about-text {
       font-size:13px;
-      color:#d8d8d8;
+      color:#444;
     }
 
-    .about-text p + p {
-      margin-top:14px;
+    .about-text p + p { margin-top:12px; }
+
+    .about-list {
+      font-size:12px;
+      color:#666;
+    }
+
+    .about-list dt {
+      float:left;
+      width:110px;
+    }
+
+    .about-list dd {
+      margin-left:110px;
+      margin-bottom:6px;
+    }
+
+    .about-list::after {
+      content:""; display:block; clear:both;
     }
 
     /* ---------- Works ---------- */
-    .works-layout {
+    .works-card {
+      border-radius:20px;
+      background:#ffffff;
+      border:1px solid #ddd;
+      padding:32px 28px 32px;
       display:grid;
-      grid-template-columns:minmax(0,3fr) minmax(0,2.2fr);
-      gap:40px;
-      align-items:flex-start;
+      grid-template-columns:minmax(0,3fr) minmax(0,2.3fr);
+      gap:28px;
     }
 
     .project-label {
-      font-size:12px;
-      letter-spacing:0.18em;
+      font-size:11px;
+      letter-spacing:0.2em;
       text-transform:uppercase;
-      color:#b0b0b0;
-      margin-bottom:8px;
+      color:#999;
+      margin-bottom:6px;
     }
 
     .project-title {
       font-size:18px;
       font-weight:500;
-      letter-spacing:0.08em;
+      letter-spacing:0.12em;
       text-transform:uppercase;
       margin-bottom:18px;
     }
 
-    /* Slider */
+    /* slider */
     .slider-shell {
-      background:#050505;
-      border-radius:24px;
-      border:1px solid #2a2a2a;
+      border-radius:16px;
       overflow:hidden;
-      box-shadow:0 26px 70px rgba(0,0,0,0.8);
+      border:1px solid #e0e0e0;
+      background:#eee;
     }
 
     .slider {
@@ -238,182 +245,155 @@
       height:100%;
       object-fit:cover;
       flex-shrink:0;
-      filter:grayscale(25%);
     }
 
     .slider-caption {
-      padding:12px 18px 14px;
+      padding:10px 14px;
       display:flex;
       justify-content:space-between;
       align-items:center;
       font-size:11px;
-      color:#a7a7a7;
-      border-top:1px solid #262626;
+      color:#777;
+      background:#fafafa;
+      border-top:1px solid #e0e0e0;
     }
 
-    .slider-hint {
-      opacity:0.7;
-    }
+    .slider-hint { opacity:0.7; }
 
-    /* Info */
+    /* info + concept */
     .meta {
       font-size:12px;
-      margin-bottom:28px;
-      color:#d8d8d8;
+      margin-bottom:24px;
+      color:#444;
     }
 
     .meta-row {
       display:flex;
-      margin-bottom:6px;
-    }
-    .meta-label {
-      width:150px;
-      color:#9c9c9c;
+      margin-bottom:4px;
     }
 
-    /* Concept */
-    .concept-title {
-      font-size:12px;
-      letter-spacing:0.18em;
+    .meta-label {
+      width:140px;
+      color:#777;
+    }
+
+    .concept-label {
+      font-size:11px;
+      letter-spacing:0.2em;
       text-transform:uppercase;
-      color:#b0b0b0;
-      margin-bottom:10px;
+      color:#999;
+      margin-bottom:8px;
     }
 
     .concept {
       font-size:12px;
-      color:#dfdfdf;
-      max-width:520px;
+      color:#333;
     }
 
-    .concept p + p {
-      margin-top:14px;
-    }
+    .concept p + p { margin-top:12px; }
 
     footer {
       margin-top:40px;
-      padding-top:24px;
-      border-top:1px solid #262626;
+      padding-top:16px;
+      border-top:1px solid #ddd;
       font-size:11px;
-      color:#888888;
+      color:#888;
       text-align:right;
     }
 
     /* ---------- Responsive ---------- */
     @media (max-width:900px) {
-      .hero-inner {
-        padding-bottom:56px;
-      }
-      .hero-main {
-        justify-content:flex-start;
-      }
-      .hero-title {
-        font-size:40px;
-      }
-      section {
-        padding:64px 0;
-      }
-      .works-layout {
-        grid-template-columns:1fr;
-        gap:32px;
-      }
-      .meta-label {
-        width:120px;
-      }
+      .page { padding:24px 20px 64px; }
+      .hero { grid-template-columns:1fr; }
+      .hero-title { font-size:32px; }
+      .hero-sub { max-width:none; }
+      .about-grid { grid-template-columns:1fr; gap:24px; }
+      .works-card { grid-template-columns:1fr; padding:24px 20px 28px; }
     }
 
     @media (max-width:640px) {
-      .nav-inner {
-        padding:8px 14px;
-      }
-      .nav-links {
-        gap:16px;
-        font-size:11px;
-      }
-      .brand {
-        font-size:12px;
-        letter-spacing:0.14em;
-      }
-      .hero-title {
-        font-size:32px;
-        letter-spacing:0.22em;
-      }
-      .page-shell {
-        padding:0 18px 64px;
-      }
-      .about-card {
-        border-radius:18px;
-      }
-      .slider-shell {
-        border-radius:18px;
-      }
+      .header-row { flex-direction:column; align-items:flex-start; gap:12px; }
+      .nav { gap:16px; font-size:11px; }
+      .logo { font-size:16px; letter-spacing:0.26em; }
+      section { padding:56px 0; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Top Navigation -->
-  <div class="nav">
-    <div class="nav-inner">
-      <a href="#home" class="brand">THa</a>
-      <div class="nav-links">
+  <div class="page">
+
+    <!-- Header -->
+    <header class="header-row">
+      <div class="logo">THa</div>
+      <nav class="nav">
         <a href="#about">About</a>
         <a href="#works">Works</a>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section>
+      <div class="hero">
+        <div class="hero-image">
+          <div class="hero-image-inner">
+            <!-- メイン写真 -->
+            <img src="S-1099.jpg" alt="House in Itabashi">
+          </div>
+        </div>
+        <div class="hero-info">
+          <div class="hero-title-block">
+            <div class="hero-title">THa</div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-
-  <!-- Hero（ロゴだけ） -->
-  <section class="hero" id="home">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-
-    <div class="hero-inner">
-      <div class="hero-main">
-        <div class="hero-title">THa</div>
-      </div>
-    </div>
-  </section>
-
-  <div class="page-shell">
+    </section>
 
     <!-- About -->
     <section id="about">
-      <h2 class="section-title">About</h2>
+      <h2 class="section-label">About</h2>
 
-      <div class="about-card">
-        <div class="about-name">Takayuki Hayashi</div>
-        <div class="about-role">
-          Architectural Designer / THa
+      <div class="about-grid">
+        <div>
+          <div class="about-name">Takayuki Hayashi</div>
+          <div class="about-role">Architectural Designer / THa</div>
+          <div class="about-text">
+            <p>
+              Completed the Master's Program in Human-Environment Studies,<br>
+              Department of Environmental Design, Kyushu University.
+            </p>
+            <p>
+              Currently working at an architectural design office, focusing on small- to mid-scale projects
+              that reinterpret existing structures and environments rather than replacing them.
+            </p>
+          </div>
         </div>
-        <div class="about-text">
-          <p>
-            Completed the Master's Program in Human-Environment Studies,<br>
-            Department of Environmental Design, Kyushu University.
-          </p>
-          <p>
-            Currently working at an architectural design office, focusing on small- to mid-scale projects
-            that reinterpret existing structures and environments rather than replacing them.
-          </p>
+
+        <div>
+          <dl class="about-list">
+            <dt>Base</dt><dd>Tokyo, Japan</dd>
+            <dt>Practice</dt><dd>Renovation / Housing / Small-Scale Projects</dd>
+            <dt>Focus</dt><dd>Existing structures, light, and everyday use</dd>
+          </dl>
         </div>
       </div>
     </section>
 
     <!-- Works -->
     <section id="works">
-      <h2 class="section-title">Works</h2>
+      <h2 class="section-label">Works</h2>
 
-      <div class="works-layout">
-
-        <!-- Left: slider -->
+      <article class="works-card">
+        <!-- left: images -->
         <div>
           <div class="project-label">Renovation / Tokyo</div>
-          <div class="project-title">House in Itabashi</div>
+          <h3 class="project-title">House in Itabashi</h3>
 
           <div class="slider-shell">
             <div class="slider" id="slider">
               <div class="slider-track" id="sliderTrack">
+                <!-- 写真リスト：ファイル名は今のまま使えます -->
                 <img src="S-1099.jpg" alt="House in Itabashi">
                 <img src="S-1097.jpg" alt="House in Itabashi">
                 <img src="S-1102.jpg" alt="House in Itabashi">
@@ -451,13 +431,13 @@
               </div>
             </div>
             <div class="slider-caption">
-              <span>House in Itabashi, Tokyo</span>
-              <span class="slider-hint">Click or wait to browse images</span>
+              <span>Image sequence</span>
+              <span class="slider-hint">Click or wait to browse</span>
             </div>
           </div>
         </div>
 
-        <!-- Right: info + concept -->
+        <!-- right: info + concept -->
         <div>
           <div class="meta">
             <div class="meta-row"><div class="meta-label">Location</div><div>Itabashi-ku, Tokyo, Japan</div></div>
@@ -471,7 +451,7 @@
             <div class="meta-row"><div class="meta-label">Photography</div><div>Takuro Kunitomo</div></div>
           </div>
 
-          <div class="concept-title">Concept</div>
+          <div class="concept-label">Concept</div>
           <div class="concept">
             <p>
               Selected renovation work focusing on the relationship between existing structures and new layers,
@@ -512,8 +492,7 @@
             </p>
           </div>
         </div>
-
-      </div>
+      </article>
 
       <footer>
         © THa / Takayuki Hayashi
