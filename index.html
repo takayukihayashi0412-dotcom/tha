@@ -52,7 +52,7 @@
       align-items:center;
       padding:0 32px;
       z-index:20;
-      pointer-events:none; /* 中身だけクリック可 */
+      pointer-events:none;
     }
 
     .nav-inner {
@@ -73,7 +73,7 @@
     .brand {
       font-size:14px;
       letter-spacing:0.18em;
-      text-transform:uppercase;
+      /* text-transform は消して THa の a を小文字表示 */
     }
 
     .nav-links {
@@ -141,17 +141,9 @@
       gap:24px;
     }
 
-    .hero-tagline {
-      font-size:11px;
-      letter-spacing:0.22em;
-      text-transform:uppercase;
-      color:#cfcfcf;
-    }
-
     .hero-main {
       display:flex;
-      justify-content:space-between;
-      gap:24px;
+      justify-content:flex-start;
       align-items:flex-end;
     }
 
@@ -159,18 +151,8 @@
       font-size:64px;
       letter-spacing:0.28em;
       font-weight:300;
-      text-transform:uppercase;
-    }
-
-    .hero-sub {
-      font-size:13px;
-      max-width:280px;
-      color:#d0d0d0;
-    }
-
-    .hero-meta {
-      font-size:11px;
-      color:#a5a5a5;
+      /* ここも大文字化を消す */
+      /* text-transform:uppercase; */
     }
 
     /* ---------- About ---------- */
@@ -323,14 +305,10 @@
         padding-bottom:56px;
       }
       .hero-main {
-        flex-direction:column;
-        align-items:flex-start;
+        justify-content:flex-start;
       }
       .hero-title {
         font-size:40px;
-      }
-      .hero-sub {
-        max-width:none;
       }
       section {
         padding:64px 0;
@@ -386,27 +364,14 @@
     </div>
   </div>
 
-  <!-- Hero -->
+  <!-- Hero（ロゴだけ） -->
   <section class="hero" id="home">
     <div class="hero-bg"></div>
     <div class="hero-overlay"></div>
 
     <div class="hero-inner">
-      <div class="hero-tagline">Architectural Portfolio</div>
-
       <div class="hero-main">
-        <div>
-          <div class="hero-title">THa</div>
-        </div>
-        <div class="hero-sub">
-          Selected renovation work focusing on the relationship between existing structures and new layers,
-          exploring how aging condominium stock can gain renewed spatial and cultural value.
-        </div>
-      </div>
-
-      <div class="hero-meta">
-        Based in Tokyo / Architectural Designer<br>
-        Portfolio site for House in Itabashi and related works.
+        <div class="hero-title">THa</div>
       </div>
     </div>
   </section>
@@ -449,7 +414,6 @@
           <div class="slider-shell">
             <div class="slider" id="slider">
               <div class="slider-track" id="sliderTrack">
-                <!-- メイン＋その他の写真（ファイル名はそのまま） -->
                 <img src="S-1099.jpg" alt="House in Itabashi">
                 <img src="S-1097.jpg" alt="House in Itabashi">
                 <img src="S-1102.jpg" alt="House in Itabashi">
@@ -509,6 +473,10 @@
 
           <div class="concept-title">Concept</div>
           <div class="concept">
+            <p>
+              Selected renovation work focusing on the relationship between existing structures and new layers,
+              exploring how aging condominium stock can gain renewed spatial and cultural value.
+            </p>
             <p>
               During Japan’s economic bubble of the 1980s, condominium construction increased dramatically.
               More than forty years later, the average age of condominiums circulating on the secondary market continues to rise.
