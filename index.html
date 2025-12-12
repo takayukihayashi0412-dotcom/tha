@@ -13,222 +13,213 @@
 
     body {
       font-family:"Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:#f5f5f5;
-      color:#111;
+      background:#111111;
+      color:#f5f5f5;
       line-height:1.7;
       letter-spacing:0.03em;
     }
 
     a { color:inherit; text-decoration:none; }
 
-    /* ---------- Shell ---------- */
-    .page {
-      max-width:1200px;
+    /* ---------- Layout ---------- */
+    .page-shell {
+      max-width:1600px;       /* ← 写真を大きく見せるために拡大 */
       margin:0 auto;
-      padding:32px 32px 80px;
+      padding:0 16px 72px;    /* ← 余白を減らす */
     }
 
-    section { padding:72px 0; }
+    section {
+      padding:64px 0;         /* ← 少し詰めて写真の密度を上げる */
+    }
 
-    h2.section-label {
-      font-size:12px;
-      letter-spacing:0.22em;
+    h2.section-title {
+      font-size:13px;
+      font-weight:500;
+      letter-spacing:0.18em;
       text-transform:uppercase;
-      color:#999;
-      margin-bottom:24px;
+      margin-bottom:28px;
+      color:#bbbbbb;
     }
 
     /* ---------- Header / Nav ---------- */
-    .header-row {
+    .nav {
+      position:fixed;
+      top:18px;
+      left:0;
+      right:0;
       display:flex;
       justify-content:space-between;
-      align-items:flex-end;
-      margin-bottom:32px;
-      border-bottom:1px solid #ddd;
-      padding-bottom:12px;
+      align-items:center;
+      padding:0 32px;
+      z-index:20;
+      pointer-events:none;
     }
 
-    .logo {
-      font-size:18px;
-      letter-spacing:0.32em;
-      /* a は小文字のまま表示したいので text-transform は使わない */
+    .nav-inner {
+      width:100%;
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      pointer-events:auto;
+      background:rgba(10,10,10,0.7);
+      backdrop-filter:blur(14px);
+      border-radius:999px;
+      padding:10px 18px;
+      border:1px solid rgba(255,255,255,0.08);
     }
 
-    .nav {
+    .brand {
+      font-size:14px;
+      letter-spacing:0.18em;
+      /* text-transform は消して THa の a を小文字表示 */
+    }
+
+    .nav-links {
       display:flex;
       gap:24px;
-      font-size:12px;
-      letter-spacing:0.18em;
+      font-size:13px;
+      letter-spacing:0.16em;
       text-transform:uppercase;
     }
 
-    .nav a {
+    .nav-links a {
       position:relative;
       padding-bottom:2px;
     }
-    .nav a::after {
+    .nav-links a::after {
       content:"";
       position:absolute;
       left:0;
       bottom:0;
       width:0;
       height:1px;
-      background:#111;
+      background:#ffffff;
       transition:width 0.2s ease;
+      opacity:0.7;
     }
-    .nav a:hover::after {
+    .nav-links a:hover::after {
       width:100%;
     }
 
     /* ---------- Hero ---------- */
     .hero {
-      display:grid;
-      grid-template-columns:minmax(0,3fr) minmax(0,2fr);
-      gap:32px;
-      align-items:stretch;
-    }
-
-    .hero-image {
-      border-radius:20px;
-      overflow:hidden;
-      background:#ccc;
-    }
-
-    .hero-image-inner {
       position:relative;
-      width:100%;
-      padding-top:65%;
+      height:100vh;
+      min-height:540px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
       overflow:hidden;
+      color:#f5f5f5;
     }
 
-    .hero-image-inner img {
+    .hero-bg {
       position:absolute;
       inset:0;
-      width:100%;
-      height:100%;
-      object-fit:cover;
+      background:url("S-1099.jpg") center center / cover no-repeat;
+      filter:grayscale(40%);
+      transform:scale(1.02);
     }
 
-    .hero-info {
+    .hero-overlay {
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at 20% 0%, rgba(255,255,255,0.08), transparent 50%),
+                 linear-gradient(to bottom, rgba(0,0,0,0.65), #050505 70%);
+    }
+
+    .hero-inner {
+      position:relative;
+      z-index:1;
+      width:100%;
+      max-width:1600px; /* ← ヒーローも幅拡大 */
+      padding:120px 16px 72px;
       display:flex;
       flex-direction:column;
-      justify-content:space-between;
-      padding:8px 0;
+      gap:24px;
     }
 
-    .hero-title-block {
-      margin-bottom:24px;
-    }
-
-    .hero-kicker {
-      font-size:11px;
-      letter-spacing:0.2em;
-      text-transform:uppercase;
-      color:#777;
-      margin-bottom:10px;
+    .hero-main {
+      display:flex;
+      justify-content:flex-start;
+      align-items:flex-end;
     }
 
     .hero-title {
-      font-size:40px;
-      font-weight:400;
-      letter-spacing:0.32em;
-    }
-
-    .hero-sub {
-      font-size:13px;
-      color:#555;
-      margin-top:20px;
-      max-width:320px;
-    }
-
-    .hero-meta {
-      font-size:11px;
-      color:#777;
+      font-size:64px;
+      letter-spacing:0.28em;
+      font-weight:300;
     }
 
     /* ---------- About ---------- */
-    .about-grid {
-      display:grid;
-      grid-template-columns:minmax(0,1.8fr) minmax(0,2.4fr);
-      gap:40px;
+    .about-card {
+      background:#151515;
+      border-radius:24px;
+      padding:32px 28px 36px;
+      border:1px solid #262626;
+      box-shadow:0 26px 60px rgba(0,0,0,0.7);
+      max-width:560px; /* 少し広げる */
     }
 
     .about-name {
       font-size:18px;
       font-weight:500;
-      margin-bottom:6px;
+      margin-bottom:8px;
     }
 
     .about-role {
       font-size:13px;
-      color:#666;
-      margin-bottom:18px;
+      color:#c3c3c3;
+      margin-bottom:20px;
     }
 
     .about-text {
       font-size:13px;
-      color:#444;
+      color:#d8d8d8;
     }
 
-    .about-text p + p { margin-top:12px; }
-
-    .about-list {
-      font-size:12px;
-      color:#666;
-    }
-
-    .about-list dt {
-      float:left;
-      width:110px;
-    }
-
-    .about-list dd {
-      margin-left:110px;
-      margin-bottom:6px;
-    }
-
-    .about-list::after {
-      content:""; display:block; clear:both;
+    .about-text p + p {
+      margin-top:14px;
     }
 
     /* ---------- Works ---------- */
-    .works-card {
-      border-radius:20px;
-      background:#ffffff;
-      border:1px solid #ddd;
-      padding:32px 28px 32px;
+    .works-layout {
       display:grid;
-      grid-template-columns:minmax(0,3fr) minmax(0,2.3fr);
-      gap:28px;
+      grid-template-columns:minmax(0, 4.2fr) minmax(0, 1.8fr); /* ← 写真側を太く */
+      gap:28px; /* ← 余白を少し詰める */
+      align-items:flex-start;
     }
 
     .project-label {
-      font-size:11px;
-      letter-spacing:0.2em;
+      font-size:12px;
+      letter-spacing:0.18em;
       text-transform:uppercase;
-      color:#999;
-      margin-bottom:6px;
+      color:#b0b0b0;
+      margin-bottom:8px;
     }
 
     .project-title {
       font-size:18px;
       font-weight:500;
-      letter-spacing:0.12em;
+      letter-spacing:0.08em;
       text-transform:uppercase;
-      margin-bottom:18px;
+      margin-bottom:14px;
     }
 
-    /* slider */
+    /* Slider */
     .slider-shell {
-      border-radius:16px;
+      background:#050505;
+      border-radius:18px;                 /* ← 少し角を小さく */
+      border:1px solid #1f1f1f;           /* ← 枠を薄く */
       overflow:hidden;
-      border:1px solid #e0e0e0;
-      background:#eee;
+      box-shadow:0 18px 48px rgba(0,0,0,0.65); /* ← 影を控えめ */
     }
 
     .slider {
       width:100%;
-      aspect-ratio:4/3;
+      aspect-ratio:16 / 10; /* ← 面積UP（4/3より大きく見える） */
       overflow:hidden;
       position:relative;
       cursor:pointer;
@@ -245,155 +236,182 @@
       height:100%;
       object-fit:cover;
       flex-shrink:0;
+      filter:grayscale(25%);
     }
 
     .slider-caption {
-      padding:10px 14px;
+      padding:10px 16px 12px; /* 少し詰める */
       display:flex;
       justify-content:space-between;
       align-items:center;
       font-size:11px;
-      color:#777;
-      background:#fafafa;
-      border-top:1px solid #e0e0e0;
+      color:#a7a7a7;
+      border-top:1px solid #262626;
     }
 
-    .slider-hint { opacity:0.7; }
+    .slider-hint {
+      opacity:0.7;
+    }
 
-    /* info + concept */
+    /* Info */
     .meta {
       font-size:12px;
-      margin-bottom:24px;
-      color:#444;
+      margin-bottom:22px;
+      color:#d8d8d8;
     }
 
     .meta-row {
       display:flex;
-      margin-bottom:4px;
+      margin-bottom:6px;
     }
-
     .meta-label {
-      width:140px;
-      color:#777;
+      width:160px; /* 右側は狭くしたのでラベル幅は少し確保 */
+      color:#9c9c9c;
     }
 
-    .concept-label {
-      font-size:11px;
-      letter-spacing:0.2em;
+    /* Concept */
+    .concept-title {
+      font-size:12px;
+      letter-spacing:0.18em;
       text-transform:uppercase;
-      color:#999;
-      margin-bottom:8px;
+      color:#b0b0b0;
+      margin-bottom:10px;
     }
 
     .concept {
       font-size:12px;
-      color:#333;
+      color:#dfdfdf;
+      max-width:560px;
     }
 
-    .concept p + p { margin-top:12px; }
+    .concept p + p {
+      margin-top:14px;
+    }
 
     footer {
       margin-top:40px;
-      padding-top:16px;
-      border-top:1px solid #ddd;
+      padding-top:24px;
+      border-top:1px solid #262626;
       font-size:11px;
-      color:#888;
+      color:#888888;
       text-align:right;
     }
 
     /* ---------- Responsive ---------- */
     @media (max-width:900px) {
-      .page { padding:24px 20px 64px; }
-      .hero { grid-template-columns:1fr; }
-      .hero-title { font-size:32px; }
-      .hero-sub { max-width:none; }
-      .about-grid { grid-template-columns:1fr; gap:24px; }
-      .works-card { grid-template-columns:1fr; padding:24px 20px 28px; }
+      .hero-inner {
+        padding-bottom:56px;
+      }
+      .hero-title {
+        font-size:40px;
+      }
+      section {
+        padding:56px 0;
+      }
+      .works-layout {
+        grid-template-columns:1fr;
+        gap:24px;
+      }
+      .meta-label {
+        width:130px;
+      }
     }
 
     @media (max-width:640px) {
-      .header-row { flex-direction:column; align-items:flex-start; gap:12px; }
-      .nav { gap:16px; font-size:11px; }
-      .logo { font-size:16px; letter-spacing:0.26em; }
-      section { padding:56px 0; }
+      .nav-inner {
+        padding:8px 14px;
+      }
+      .nav-links {
+        gap:16px;
+        font-size:11px;
+      }
+      .brand {
+        font-size:12px;
+        letter-spacing:0.14em;
+      }
+      .hero-title {
+        font-size:32px;
+        letter-spacing:0.22em;
+      }
+      .page-shell {
+        padding:0 14px 64px;
+      }
+      .about-card {
+        border-radius:18px;
+      }
+      .slider-shell {
+        border-radius:16px;
+      }
+      .slider {
+        aspect-ratio: 4 / 3; /* スマホは縦が足りないので4:3に戻して見やすく */
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="page">
-
-    <!-- Header -->
-    <header class="header-row">
-      <div class="logo">THa</div>
-      <nav class="nav">
+  <!-- Top Navigation -->
+  <div class="nav">
+    <div class="nav-inner">
+      <a href="#home" class="brand">THa</a>
+      <div class="nav-links">
         <a href="#about">About</a>
         <a href="#works">Works</a>
-      </nav>
-    </header>
-
-    <!-- Hero -->
-    <section>
-      <div class="hero">
-        <div class="hero-image">
-          <div class="hero-image-inner">
-            <!-- メイン写真 -->
-            <img src="S-1099.jpg" alt="House in Itabashi">
-          </div>
-        </div>
-        <div class="hero-info">
-          <div class="hero-title-block">
-            <div class="hero-title">THa</div>
-          </div>
-        </div>
       </div>
-    </section>
+    </div>
+  </div>
+
+  <!-- Hero（ロゴだけ） -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-inner">
+      <div class="hero-main">
+        <div class="hero-title">THa</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="page-shell">
 
     <!-- About -->
     <section id="about">
-      <h2 class="section-label">About</h2>
+      <h2 class="section-title">About</h2>
 
-      <div class="about-grid">
-        <div>
-          <div class="about-name">Takayuki Hayashi</div>
-          <div class="about-role">Architectural Designer / THa</div>
-          <div class="about-text">
-            <p>
-              Completed the Master's Program in Human-Environment Studies,<br>
-              Department of Environmental Design, Kyushu University.
-            </p>
-            <p>
-              Currently working at an architectural design office, focusing on small- to mid-scale projects
-              that reinterpret existing structures and environments rather than replacing them.
-            </p>
-          </div>
+      <div class="about-card">
+        <div class="about-name">Takayuki Hayashi</div>
+        <div class="about-role">
+          Architectural Designer / THa
         </div>
-
-        <div>
-          <dl class="about-list">
-            <dt>Base</dt><dd>Tokyo, Japan</dd>
-            <dt>Practice</dt><dd>Renovation / Housing / Small-Scale Projects</dd>
-            <dt>Focus</dt><dd>Existing structures, light, and everyday use</dd>
-          </dl>
+        <div class="about-text">
+          <p>
+            Completed the Master's Program in Human-Environment Studies,<br>
+            Department of Environmental Design, Kyushu University.
+          </p>
+          <p>
+            Currently working at an architectural design office, focusing on small- to mid-scale projects
+            that reinterpret existing structures and environments rather than replacing them.
+          </p>
         </div>
       </div>
     </section>
 
     <!-- Works -->
     <section id="works">
-      <h2 class="section-label">Works</h2>
+      <h2 class="section-title">Works</h2>
 
-      <article class="works-card">
-        <!-- left: images -->
+      <div class="works-layout">
+
+        <!-- Left: slider -->
         <div>
           <div class="project-label">Renovation / Tokyo</div>
-          <h3 class="project-title">House in Itabashi</h3>
+          <div class="project-title">House in Itabashi</div>
 
           <div class="slider-shell">
             <div class="slider" id="slider">
               <div class="slider-track" id="sliderTrack">
-                <!-- 写真リスト：ファイル名は今のまま使えます -->
                 <img src="S-1099.jpg" alt="House in Itabashi">
                 <img src="S-1097.jpg" alt="House in Itabashi">
                 <img src="S-1102.jpg" alt="House in Itabashi">
@@ -431,13 +449,13 @@
               </div>
             </div>
             <div class="slider-caption">
-              <span>Image sequence</span>
-              <span class="slider-hint">Click or wait to browse</span>
+              <span>House in Itabashi, Tokyo</span>
+              <span class="slider-hint">Click or wait to browse images</span>
             </div>
           </div>
         </div>
 
-        <!-- right: info + concept -->
+        <!-- Right: info + concept -->
         <div>
           <div class="meta">
             <div class="meta-row"><div class="meta-label">Location</div><div>Itabashi-ku, Tokyo, Japan</div></div>
@@ -451,7 +469,7 @@
             <div class="meta-row"><div class="meta-label">Photography</div><div>Takuro Kunitomo</div></div>
           </div>
 
-          <div class="concept-label">Concept</div>
+          <div class="concept-title">Concept</div>
           <div class="concept">
             <p>
               Selected renovation work focusing on the relationship between existing structures and new layers,
@@ -492,7 +510,8 @@
             </p>
           </div>
         </div>
-      </article>
+
+      </div>
 
       <footer>
         © THa / Takayuki Hayashi
