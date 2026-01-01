@@ -97,7 +97,6 @@
       width:100%; aspect-ratio:16 / 10;
       overflow:hidden; cursor:pointer; position:relative;
     }
-    /* Technical Sliders - Contain mode to see full drawings */
     .slider.docs-slider { aspect-ratio: 1.5 / 1; cursor: zoom-in; }
 
     .slider-track{
@@ -337,7 +336,7 @@
 
         <div class="contact-card" id="contact">
           <div class="contact-title-small">Contact</div>
-          <form class="contact-form" action="https://formspree.io/f/takayukihayashi0412@gmail.com" method="POST">
+          <form class="contact-form" action="https://formspree.io/f/mqeaadop" method="POST">
             <div class="form-group">
               <label>Name</label><input type="text" name="name" required>
             </div>
@@ -362,7 +361,6 @@
   </div>
 
   <script>
-    // Slider Core Function
     function setupSlider(sliderEl, speed = 5000) {
       const track = sliderEl.querySelector('.slider-track');
       const slides = track.querySelectorAll('img');
@@ -378,7 +376,6 @@
       }
 
       sliderEl.addEventListener('click', () => {
-        // If it's a technical doc, open modal first
         if (sliderEl.classList.contains('docs-slider')) {
           openModal(slides[current].src, slides[current].alt);
         }
@@ -397,7 +394,6 @@
       }, speed);
     }
 
-    // Modal Logic
     const modal = document.getElementById("modal");
     const modalImg = document.getElementById("modalImg");
     function openModal(src, alt) {
@@ -413,7 +409,6 @@
     modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
 
-    // Init All Sliders
     document.querySelectorAll('.slider').forEach(s => setupSlider(s));
   </script>
 
