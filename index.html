@@ -116,7 +116,7 @@
     .works-layout{
       display:grid;
       grid-template-columns:minmax(0,4.2fr) minmax(0,1.8fr);
-      gap:28px;
+      gap:48px;
       align-items:flex-start;
     }
     .project-label{
@@ -134,13 +134,14 @@
       margin-bottom:14px;
     }
 
-    /* Slider (finished photos) */
+    /* Slider Common Styles */
     .slider-shell{
       background:#050505;
       border-radius:18px;
       border:1px solid #1f1f1f;
       overflow:hidden;
       box-shadow:0 18px 48px rgba(0,0,0,0.65);
+      margin-bottom: 32px;
     }
     .slider{
       width:100%;
@@ -149,43 +150,58 @@
       cursor:pointer;
       position:relative;
     }
+    /* Technical Docs Slider - Adjust aspect ratio and fit */
+    .slider.docs-slider {
+      aspect-ratio: 1.4 / 1; 
+      cursor: zoom-in;
+    }
+
     .slider-track{
       display:flex;
       height:100%;
-      transition:transform 0.6s ease;
+      transition:transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
     }
     .slider-track img{
       width:100%;
       height:100%;
       object-fit:cover;
       flex-shrink:0;
-      filter:grayscale(25%);
+      filter:grayscale(15%);
     }
+    /* Docs should be contained to see full drawing */
+    .slider.docs-slider .slider-track img {
+      object-fit: contain;
+      background: #050505;
+      padding: 20px;
+    }
+
     .slider-caption{
-      padding:10px 16px;
+      padding:12px 16px;
       font-size:11px;
-      color:#aaa;
+      color:#888;
       display:flex;
       justify-content:space-between;
       border-top:1px solid #262626;
+      background: #0a0a0a;
     }
 
-    /* Figures Grid */
-    .figures-grid{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap:20px;
-    }
-    .figures-grid.three-cols {
-      grid-template-columns: repeat(3, 1fr);
+    .subsection-header {
+      margin-bottom: 12px;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: #aaa;
+      text-transform: uppercase;
+      border-left: 2px solid #444;
+      padding-left: 10px;
     }
 
+    /* Meta & Concept Column */
     .meta{
       font-size:12px;
-      margin-bottom:22px;
+      margin-bottom:28px;
       color:#d8d8d8;
     }
-    .meta-row{ display:flex; margin-bottom:6px; }
+    .meta-row{ display:flex; margin-bottom:8px; }
     .meta-label{ width:160px; color:#9c9c9c; }
 
     .concept-title{
@@ -200,55 +216,7 @@
       color:#dfdfdf;
       max-width:560px;
     }
-    .concept p + p{ margin-top:14px; }
-
-    /* Plan / Process blocks */
-    .subsection{
-      margin-top:26px;
-    }
-    .subsection-title{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-end;
-      margin:28px 0 12px;
-      padding-bottom:10px;
-      border-bottom:1px solid #262626;
-    }
-    .subsection-title h3{
-      font-size:12px;
-      letter-spacing:0.18em;
-      text-transform:uppercase;
-      color:#bbb;
-      font-weight:500;
-    }
-    .subsection-title span{
-      font-size:11px;
-      color:#8f8f8f;
-    }
-
-    .figure{
-      border-radius:18px;
-      overflow:hidden;
-      border:1px solid #1f1f1f;
-      background:#050505;
-      box-shadow:0 18px 48px rgba(0,0,0,0.55);
-      cursor:zoom-in;
-      height: 100%;
-    }
-    .figure img{
-      display:block;
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      filter:grayscale(15%);
-    }
-    .figure-caption{
-      padding:10px 16px;
-      font-size:11px;
-      color:#aaa;
-      border-top:1px solid #262626;
-      background: #050505;
-    }
+    .concept p + p{ margin-top:16px; }
 
     /* About & Contact Section */
     .info-layout {
@@ -256,7 +224,6 @@
       grid-template-columns: 1fr 1fr;
       gap: 40px;
     }
-
     .about-card, .contact-card{
       background:#151515;
       border-radius:24px;
@@ -309,49 +276,21 @@
 
     /* Modal */
     .modal{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,0.85);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:999;
-      padding:24px;
+      position:fixed; inset:0;
+      background:rgba(0,0,0,0.92);
+      display:none; align-items:center; justify-content:center;
+      z-index:999; padding:24px;
     }
     .modal.open{ display:flex; }
-    .modal-inner{
-      width:min(1200px, 95vw);
-      max-height:90vh;
-      position:relative;
-    }
-    .modal-img{
-      width:100%;
-      max-height:90vh;
-      object-fit:contain;
-      display:block;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,0.12);
-      background:#000;
-    }
+    .modal-inner{ width:min(1400px, 95vw); max-height:90vh; position:relative; }
+    .modal-img{ width:100%; max-height:90vh; object-fit:contain; border-radius:8px; }
     .modal-close{
-      position:absolute;
-      top:-12px;
-      right:-12px;
-      width:36px;
-      height:36px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,0.15);
-      background:rgba(10,10,10,0.8);
-      color:#fff;
-      cursor:pointer;
-      font-size:18px;
-      line-height:34px;
-      text-align:center;
+      position:absolute; top:-40px; right:0;
+      color:#fff; cursor:pointer; font-size:32px; font-weight:300;
     }
 
     @media (max-width:1100px){
       .info-layout { grid-template-columns: 1fr; }
-      .figures-grid.three-cols { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width:900px){
       .hero-title{ font-size:40px; }
@@ -360,11 +299,9 @@
     @media (max-width:640px){
       .nav-inner{ padding:8px 14px; }
       .nav-links{ gap:16px; font-size:11px; }
-      .brand{ font-size:12px; letter-spacing:0.14em; }
-      .hero-title{ font-size:32px; letter-spacing:0.22em; }
-      .page-shell{ padding:0 14px 64px; }
-      .slider{ aspect-ratio:4 / 3; }
-      .figures-grid, .figures-grid.three-cols { grid-template-columns: 1fr; }
+      .brand{ font-size:12px; }
+      .hero-title{ font-size:32px; }
+      .slider, .slider.docs-slider { aspect-ratio: 4 / 3; }
     }
   </style>
 </head>
@@ -401,86 +338,66 @@
           <div class="project-label">Renovation / Tokyo</div>
           <div class="project-title">An Ordinary Renovation of an Apartment</div>
 
+          <div class="subsection-header">Finished Photos</div>
           <div class="slider-shell">
-            <div class="slider" id="slider" title="Click to advance">
-              <div class="slider-track" id="sliderTrack">
-                <img src="S-1099.jpg" alt="Finished Photo">
-                <img src="S-1097.jpg" alt="Finished Photo">
-                <img src="S-1102.jpg" alt="Finished Photo">
-                <img src="S-1106.jpg" alt="Finished Photo">
-                <img src="S-1113.jpg" alt="Finished Photo">
-                <img src="S-1114.jpg" alt="Finished Photo">
-                <img src="S-1121.jpg" alt="Finished Photo">
-                <img src="S-1122.jpg" alt="Finished Photo">
-                <img src="S-1124.jpg" alt="Finished Photo">
-                <img src="S-1126.jpg" alt="Finished Photo">
-                <img src="S-1128.jpg" alt="Finished Photo">
-                <img src="S-1133.jpg" alt="Finished Photo">
-                <img src="S-1138.jpg" alt="Finished Photo">
-                <img src="S-1143.jpg" alt="Finished Photo">
-                <img src="S-1146.jpg" alt="Finished Photo">
-                <img src="S-1147.jpg" alt="Finished Photo">
-                <img src="S-1149.jpg" alt="Finished Photo">
-                <img src="S-1150.jpg" alt="Finished Photo">
-                <img src="S-1153.jpg" alt="Finished Photo">
-                <img src="S-1154.jpg" alt="Finished Photo">
-                <img src="S-1157.jpg" alt="Finished Photo">
-                <img src="S-1158.jpg" alt="Finished Photo">
-                <img src="S-1160.jpg" alt="Finished Photo">
-                <img src="S-1161.jpg" alt="Finished Photo">
-                <img src="S-1163.jpg" alt="Finished Photo">
-                <img src="S-1164.jpg" alt="Finished Photo">
-                <img src="S-1168.jpg" alt="Finished Photo">
-                <img src="S-1170.jpg" alt="Finished Photo">
-                <img src="S-1171.jpg" alt="Finished Photo">
-                <img src="S-1172.jpg" alt="Finished Photo">
-                <img src="S-1173.jpg" alt="Finished Photo">
-                <img src="S-1176.jpg" alt="Finished Photo">
-                <img src="S-1180.jpg" alt="Finished Photo">
-                <img src="S-1182.jpg" alt="Finished Photo">
+            <div class="slider" data-slider-id="photos">
+              <div class="slider-track">
+                <img src="S-1099.jpg" alt="Photo 1">
+                <img src="S-1097.jpg" alt="Photo 2">
+                <img src="S-1102.jpg" alt="Photo 3">
+                <img src="S-1106.jpg" alt="Photo 4">
+                <img src="S-1113.jpg" alt="Photo 5">
+                <img src="S-1114.jpg" alt="Photo 6">
+                <img src="S-1121.jpg" alt="Photo 7">
+                <img src="S-1122.jpg" alt="Photo 8">
+                <img src="S-1124.jpg" alt="Photo 9">
+                <img src="S-1126.jpg" alt="Photo 10">
+                <img src="S-1128.jpg" alt="Photo 11">
+                <img src="S-1133.jpg" alt="Photo 12">
+                <img src="S-1138.jpg" alt="Photo 13">
+                <img src="S-1143.jpg" alt="Photo 14">
+                <img src="S-1146.jpg" alt="Photo 15">
+                <img src="S-1147.jpg" alt="Photo 16">
+                <img src="S-1149.jpg" alt="Photo 17">
+                <img src="S-1150.jpg" alt="Photo 18">
+                <img src="S-1153.jpg" alt="Photo 19">
+                <img src="S-1154.jpg" alt="Photo 20">
+                <img src="S-1157.jpg" alt="Photo 21">
+                <img src="S-1158.jpg" alt="Photo 22">
+                <img src="S-1160.jpg" alt="Photo 23">
+                <img src="S-1161.jpg" alt="Photo 24">
+                <img src="S-1163.jpg" alt="Photo 25">
+                <img src="S-1164.jpg" alt="Photo 26">
+                <img src="S-1168.jpg" alt="Photo 27">
+                <img src="S-1170.jpg" alt="Photo 28">
+                <img src="S-1171.jpg" alt="Photo 29">
+                <img src="S-1172.jpg" alt="Photo 30">
+                <img src="S-1173.jpg" alt="Photo 31">
+                <img src="S-1176.jpg" alt="Photo 32">
+                <img src="S-1180.jpg" alt="Photo 33">
+                <img src="S-1182.jpg" alt="Photo 34">
               </div>
             </div>
             <div class="slider-caption">
-              <span>Finished Photos</span>
-              <span>Click or wait</span>
+              <span>View Gallery</span>
+              <span>Click to advance</span>
             </div>
           </div>
 
-          <div class="subsection">
-            <div class="subsection-title">
-              <h3>Plan / Existing & Proposed</h3>
-              <span>Click to enlarge</span>
-            </div>
-            <div class="figures-grid">
-              <div class="figure" data-modal-src="2_PLAN_before.jpg">
+          <div class="subsection-header">Drawings & Process</div>
+          <div class="slider-shell">
+            <div class="slider docs-slider" data-slider-id="docs">
+              <div class="slider-track">
                 <img src="2_PLAN_before.jpg" alt="Before Plan">
-                <div class="figure-caption">Before</div>
-              </div>
-              <div class="figure" data-modal-src="1_PLAN.jpg">
                 <img src="1_PLAN.jpg" alt="After Plan">
-                <div class="figure-caption">After</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="subsection">
-            <div class="subsection-title">
-              <h3>Drawings & Construction Process</h3>
-              <span>Click to enlarge</span>
-            </div>
-            <div class="figures-grid three-cols">
-              <div class="figure" data-modal-src="3_アイソメ(A3).jpg">
-                <img src="3_アイソメ(A3).jpg" alt="Isometric A3">
-                <div class="figure-caption">Isometric View</div>
-              </div>
-              <div class="figure" data-modal-src="4_詳細アイソメ_英語.jpg">
+                <img src="3_アイソメ(A3).jpg" alt="Isometric">
                 <img src="4_詳細アイソメ_英語.jpg" alt="Detailed Isometric">
-                <div class="figure-caption">Detailed Study</div>
+                <img src="5_現場写真（白黒）.jpg" alt="Process Photos">
               </div>
-              <div class="figure" data-modal-src="5_現場写真（白黒）.jpg">
-                <img src="5_現場写真（白黒）.jpg" alt="Construction Process">
-                <div class="figure-caption">Process (B/W)</div>
-              </div>
+            </div>
+            <div class="slider-caption">
+              <span id="doc-label">Plan / Before</span>
+              <span>Click to enlarge / advance</span>
             </div>
           </div>
         </div>
@@ -509,10 +426,8 @@
             <p>Third, large beams—often considered problematic in older buildings—were reinterpreted. By inserting shallow inner eaves beneath them and integrating indirect lighting, the beams become environmental devices that modulate light and perception, rather than obstacles to be hidden.</p>
             <p>Through these operations, the project achieves a layered spatial quality that goes beyond superficial “Japanese-style” expressions. The method also reduces construction waste to less than half that of a standard renovation. Importantly, this approach is not tied to a specific plan: it offers a transferable strategy applicable to other aging condominiums, suggesting a realistic and sustainable architectural value for Japan’s expanding housing stock.</p>
           </div>
-
           <footer>© THa / Takayuki Hayashi</footer>
         </div>
-
       </div>
     </section>
 
@@ -548,61 +463,80 @@
         </div>
       </div>
     </section>
-
   </div>
 
-  <div class="modal" id="modal" aria-hidden="true">
+  <div class="modal" id="modal">
     <div class="modal-inner">
-      <div class="modal-close" id="modalClose" aria-label="Close">×</div>
+      <div class="modal-close" id="modalClose">×</div>
       <img class="modal-img" id="modalImg" src="" alt="">
     </div>
   </div>
 
   <script>
-    // Slider Logic
-    (function () {
-      const track = document.getElementById("sliderTrack");
-      const slider = document.getElementById("slider");
-      if (!track || !slider) return;
-      const slides = track.children.length;
+    // Universal Slider Function
+    function initSlider(sliderEl, autoPlaySpeed = 5000) {
+      const track = sliderEl.querySelector('.slider-track');
+      const slides = track.children;
+      const total = slides.length;
       let current = 0;
       let paused = false;
-      function goTo(index) {
-        current = (index + slides) % slides;
-        track.style.transform = "translateX(-" + (current * 100) + "%)";
-      }
-      slider.addEventListener("click", () => goTo(current + 1));
-      slider.addEventListener("mouseenter", () => paused = true);
-      slider.addEventListener("mouseleave", () => paused = false);
-      setInterval(() => { if (!paused && slides > 1) goTo(current + 1); }, 5000);
-    })();
+      const isDocSlider = sliderEl.classList.contains('docs-slider');
+      const docLabel = document.getElementById('doc-label');
+      const docNames = ["Plan / Before", "Plan / After", "Isometric View", "Detailed Study", "Process"];
 
-    // Modal Logic
-    (function () {
-      const modal = document.getElementById("modal");
-      const modalImg = document.getElementById("modalImg");
-      const closeBtn = document.getElementById("modalClose");
-      function openModal(src, altText) {
-        modalImg.src = src;
-        modalImg.alt = altText || "";
-        modal.classList.add("open");
-        document.body.style.overflow = "hidden";
+      function goTo(index) {
+        current = (index + total) % total;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        if (isDocSlider && docLabel) {
+          docLabel.innerText = docNames[current] || "Drawing";
+        }
       }
-      function closeModal() {
-        modal.classList.remove("open");
-        document.body.style.overflow = "";
-      }
-      document.querySelectorAll(".figure").forEach(el => {
-        el.addEventListener("click", () => {
-          const src = el.getAttribute("data-modal-src");
-          const img = el.querySelector("img");
-          openModal(src, img ? img.alt : "");
-        });
+
+      sliderEl.addEventListener('click', (e) => {
+        // If it's a doc slider, open modal on click, BUT only if it wasn't a swipe (simplified)
+        if (isDocSlider) {
+          openModal(slides[current].src, slides[current].alt);
+        }
+        goTo(current + 1);
       });
-      closeBtn.addEventListener("click", closeModal);
-      modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
-      document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
-    })();
+
+      // Photos slider advances on click too
+      if (!isDocSlider) {
+        sliderEl.addEventListener('click', () => goTo(current + 1));
+      }
+
+      sliderEl.addEventListener('mouseenter', () => paused = true);
+      sliderEl.addEventListener('mouseleave', () => paused = false);
+
+      setInterval(() => {
+        if (!paused && total > 1) goTo(current + 1);
+      }, autoPlaySpeed);
+    }
+
+    // Modal logic
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modalImg");
+    const modalClose = document.getElementById("modalClose");
+
+    function openModal(src, alt) {
+      modalImg.src = src;
+      modalImg.alt = alt;
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    modalClose.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+    // Initialize all sliders
+    document.querySelectorAll('.slider').forEach(s => initSlider(s));
+
   </script>
 
 </body>
