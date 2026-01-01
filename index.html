@@ -170,7 +170,16 @@
       border-top:1px solid #262626;
     }
 
-    /* Right side info */
+    /* Figures Grid */
+    .figures-grid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:20px;
+    }
+    .figures-grid.three-cols {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
     .meta{
       font-size:12px;
       margin-bottom:22px;
@@ -224,12 +233,13 @@
       background:#050505;
       box-shadow:0 18px 48px rgba(0,0,0,0.55);
       cursor:zoom-in;
+      height: 100%;
     }
     .figure img{
       display:block;
       width:100%;
-      height:auto;
-      object-fit:contain;
+      height:100%;
+      object-fit:cover;
       filter:grayscale(15%);
     }
     .figure-caption{
@@ -237,21 +247,56 @@
       font-size:11px;
       color:#aaa;
       border-top:1px solid #262626;
+      background: #050505;
     }
 
-    /* About */
-    .about-card{
+    /* About & Contact Section */
+    .info-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .about-card, .contact-card{
       background:#151515;
       border-radius:24px;
       padding:32px 28px;
       border:1px solid #262626;
       box-shadow:0 26px 60px rgba(0,0,0,0.7);
-      max-width:560px;
     }
-    .about-name{ font-size:18px; font-weight:500; margin-bottom:8px; }
+    .about-name, .contact-title-small{ font-size:18px; font-weight:500; margin-bottom:8px; }
     .about-role{ font-size:13px; color:#c3c3c3; margin-bottom:20px; }
     .about-text{ font-size:13px; color:#d8d8d8; }
     .about-text p + p{ margin-top:14px; }
+
+    /* Form Styles */
+    .contact-form { margin-top: 20px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 11px; text-transform: uppercase; color: #888; margin-bottom: 4px; }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      background: #0a0a0a;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 10px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 13px;
+    }
+    .form-group textarea { height: 100px; resize: none; }
+    .submit-btn {
+      background: #fff;
+      color: #000;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .submit-btn:hover { opacity: 0.8; }
 
     footer{
       margin-top:40px;
@@ -262,7 +307,7 @@
       text-align:right;
     }
 
-    /* Modal (image enlarge) */
+    /* Modal */
     .modal{
       position:fixed;
       inset:0;
@@ -304,6 +349,10 @@
       text-align:center;
     }
 
+    @media (max-width:1100px){
+      .info-layout { grid-template-columns: 1fr; }
+      .figures-grid.three-cols { grid-template-columns: repeat(2, 1fr); }
+    }
     @media (max-width:900px){
       .hero-title{ font-size:40px; }
       .works-layout{ grid-template-columns:1fr; }
@@ -315,26 +364,24 @@
       .hero-title{ font-size:32px; letter-spacing:0.22em; }
       .page-shell{ padding:0 14px 64px; }
       .slider{ aspect-ratio:4 / 3; }
-      .about-card{ border-radius:18px; }
-      .slider-shell, .figure{ border-radius:16px; }
+      .figures-grid, .figures-grid.three-cols { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Navigation -->
   <div class="nav">
     <div class="nav-inner">
       <a href="#home" class="brand">THa</a>
       <div class="nav-links">
         <a href="#works">Works</a>
         <a href="#about">About</a>
+        <a href="#contact">Contact</a>
       </div>
     </div>
   </div>
 
-  <!-- Hero -->
   <section class="hero" id="home">
     <div class="hero-bg"></div>
     <div class="hero-overlay"></div>
@@ -345,55 +392,52 @@
 
   <div class="page-shell">
 
-    <!-- Works -->
     <section id="works">
       <h2 class="section-title">Works</h2>
 
       <div class="works-layout">
 
-        <!-- Left -->
         <div>
           <div class="project-label">Renovation / Tokyo</div>
-          <div class="project-title">House in Itabashi</div>
+          <div class="project-title">An Ordinary Renovation of an Apartment</div>
 
-          <!-- Finished Photos Slider -->
           <div class="slider-shell">
             <div class="slider" id="slider" title="Click to advance">
               <div class="slider-track" id="sliderTrack">
-                <img src="S-1099.jpg" alt="House in Itabashi">
-                <img src="S-1097.jpg" alt="House in Itabashi">
-                <img src="S-1102.jpg" alt="House in Itabashi">
-                <img src="S-1106.jpg" alt="House in Itabashi">
-                <img src="S-1113.jpg" alt="House in Itabashi">
-                <img src="S-1114.jpg" alt="House in Itabashi">
-                <img src="S-1121.jpg" alt="House in Itabashi">
-                <img src="S-1122.jpg" alt="House in Itabashi">
-                <img src="S-1124.jpg" alt="House in Itabashi">
-                <img src="S-1126.jpg" alt="House in Itabashi">
-                <img src="S-1128.jpg" alt="House in Itabashi">
-                <img src="S-1133.jpg" alt="House in Itabashi">
-                <img src="S-1138.jpg" alt="House in Itabashi">
-                <img src="S-1143.jpg" alt="House in Itabashi">
-                <img src="S-1146.jpg" alt="House in Itabashi">
-                <img src="S-1147.jpg" alt="House in Itabashi">
-                <img src="S-1149.jpg" alt="House in Itabashi">
-                <img src="S-1150.jpg" alt="House in Itabashi">
-                <img src="S-1153.jpg" alt="House in Itabashi">
-                <img src="S-1154.jpg" alt="House in Itabashi">
-                <img src="S-1157.jpg" alt="House in Itabashi">
-                <img src="S-1158.jpg" alt="House in Itabashi">
-                <img src="S-1160.jpg" alt="House in Itabashi">
-                <img src="S-1161.jpg" alt="House in Itabashi">
-                <img src="S-1163.jpg" alt="House in Itabashi">
-                <img src="S-1164.jpg" alt="House in Itabashi">
-                <img src="S-1168.jpg" alt="House in Itabashi">
-                <img src="S-1170.jpg" alt="House in Itabashi">
-                <img src="S-1171.jpg" alt="House in Itabashi">
-                <img src="S-1172.jpg" alt="House in Itabashi">
-                <img src="S-1173.jpg" alt="House in Itabashi">
-                <img src="S-1176.jpg" alt="House in Itabashi">
-                <img src="S-1180.jpg" alt="House in Itabashi">
-                <img src="S-1182.jpg" alt="House in Itabashi">
+                <img src="S-1099.jpg" alt="Finished Photo">
+                <img src="S-1097.jpg" alt="Finished Photo">
+                <img src="S-1102.jpg" alt="Finished Photo">
+                <img src="S-1106.jpg" alt="Finished Photo">
+                <img src="S-1113.jpg" alt="Finished Photo">
+                <img src="S-1114.jpg" alt="Finished Photo">
+                <img src="S-1121.jpg" alt="Finished Photo">
+                <img src="S-1122.jpg" alt="Finished Photo">
+                <img src="S-1124.jpg" alt="Finished Photo">
+                <img src="S-1126.jpg" alt="Finished Photo">
+                <img src="S-1128.jpg" alt="Finished Photo">
+                <img src="S-1133.jpg" alt="Finished Photo">
+                <img src="S-1138.jpg" alt="Finished Photo">
+                <img src="S-1143.jpg" alt="Finished Photo">
+                <img src="S-1146.jpg" alt="Finished Photo">
+                <img src="S-1147.jpg" alt="Finished Photo">
+                <img src="S-1149.jpg" alt="Finished Photo">
+                <img src="S-1150.jpg" alt="Finished Photo">
+                <img src="S-1153.jpg" alt="Finished Photo">
+                <img src="S-1154.jpg" alt="Finished Photo">
+                <img src="S-1157.jpg" alt="Finished Photo">
+                <img src="S-1158.jpg" alt="Finished Photo">
+                <img src="S-1160.jpg" alt="Finished Photo">
+                <img src="S-1161.jpg" alt="Finished Photo">
+                <img src="S-1163.jpg" alt="Finished Photo">
+                <img src="S-1164.jpg" alt="Finished Photo">
+                <img src="S-1168.jpg" alt="Finished Photo">
+                <img src="S-1170.jpg" alt="Finished Photo">
+                <img src="S-1171.jpg" alt="Finished Photo">
+                <img src="S-1172.jpg" alt="Finished Photo">
+                <img src="S-1173.jpg" alt="Finished Photo">
+                <img src="S-1176.jpg" alt="Finished Photo">
+                <img src="S-1180.jpg" alt="Finished Photo">
+                <img src="S-1182.jpg" alt="Finished Photo">
               </div>
             </div>
             <div class="slider-caption">
@@ -402,34 +446,45 @@
             </div>
           </div>
 
-          <!-- Plan -->
           <div class="subsection">
             <div class="subsection-title">
-              <h3>Plan</h3>
+              <h3>Plan / Existing & Proposed</h3>
               <span>Click to enlarge</span>
             </div>
-
-            <div class="figure" data-modal-src="PLAN.jpg">
-              <img src="PLAN.jpg" alt="Plan">
-              <div class="figure-caption">Plan</div>
+            <div class="figures-grid">
+              <div class="figure" data-modal-src="2_PLAN_before.jpg">
+                <img src="2_PLAN_before.jpg" alt="Before Plan">
+                <div class="figure-caption">Before</div>
+              </div>
+              <div class="figure" data-modal-src="1_PLAN.jpg">
+                <img src="1_PLAN.jpg" alt="After Plan">
+                <div class="figure-caption">After</div>
+              </div>
             </div>
           </div>
 
-          <!-- Process -->
           <div class="subsection">
             <div class="subsection-title">
-              <h3>Process</h3>
+              <h3>Drawings & Construction Process</h3>
               <span>Click to enlarge</span>
             </div>
-
-            <div class="figure" data-modal-src="現場写真（白黒）.jpg">
-              <img src="現場写真（白黒）.jpg" alt="Construction photos (B/W)">
-              <div class="figure-caption">Construction / Process</div>
+            <div class="figures-grid three-cols">
+              <div class="figure" data-modal-src="3_アイソメ(A3).jpg">
+                <img src="3_アイソメ(A3).jpg" alt="Isometric A3">
+                <div class="figure-caption">Isometric View</div>
+              </div>
+              <div class="figure" data-modal-src="4_詳細アイソメ_英語.jpg">
+                <img src="4_詳細アイソメ_英語.jpg" alt="Detailed Isometric">
+                <div class="figure-caption">Detailed Study</div>
+              </div>
+              <div class="figure" data-modal-src="5_現場写真（白黒）.jpg">
+                <img src="5_現場写真（白黒）.jpg" alt="Construction Process">
+                <div class="figure-caption">Process (B/W)</div>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Right -->
         <div>
           <div class="meta">
             <div class="meta-row"><div class="meta-label">Location</div><div>Itabashi-ku, Tokyo, Japan</div></div>
@@ -445,19 +500,14 @@
 
           <div class="concept-title">Concept</div>
           <div class="concept">
-            <p>Selected renovation project focusing on the relationship between existing structures and newly added layers, exploring how aging condominium stock can acquire renewed spatial and cultural value.</p>
-
-            <p>During Japan’s economic bubble of the 1980s, condominium construction increased dramatically. More than forty years later, the average age of condominiums circulating on the secondary market continues to rise. In 2024, the average age of newly listed existing condominiums in the Tokyo metropolitan area reached 30.22 years, up from 25.84 years in 2019—clear evidence of an aging housing stock.</p>
-
-            <p>Today, a 40-year-old condominium is often perceived as “old.” However, as the volume of existing condominiums continues to grow, the threshold of what is considered “old” will inevitably shift. While traditional houses in Japan are often embraced as kominka, valued for their age and accumulated character, condominiums have yet to attain a comparable cultural appreciation. This project explores the potential of renovation to expand such values by preserving and reinterpreting existing materials and architectural elements.</p>
-
-            <p>Rather than adopting a complete skeleton-and-infill approach, the renovation employs an upcycling strategy. Retaining the underlying logic of the original 4LDK layout, the plan was reconfigured into an open and flexible 2LDK. Portions of the existing partitions were removed, and the original studs were exposed to form a lattice-like divider that gently zones the space while supporting a new counter.</p>
-
-            <p>The former tatami room was finished with flooring of a different plank width and a slightly darker tone, preventing the enlarged living space from becoming monotonous and introducing a subtle rhythm to the interior. Indirect lighting runs along the upper perimeter of the walls, softly stitching together the old and new layers.</p>
-
-            <p>The kitchen, once enclosed, was opened to the living area, with exposed studs serving as a permeable boundary. Light now penetrates deep into the plan, while shelving inserted between the studs provides additional storage. Within a single grid bay, intercom and switches are neatly consolidated. Inspired by the way aged detached houses celebrate their accumulated layers over time, this renovation embraces and reactivates what already exists.</p>
-
-            <p>By reinterpreting the given rather than replacing it, the project proposes a renewed lifespan and architectural value for the aging condominium as housing stock.</p>
+            <p>This renovation reconsiders a typical Japanese condominium that has aged over time, using the concept of “ordinary” (futsū) as its guiding framework. Rather than pursuing novelty or stylistic distinction, the project aims for versatility by carefully reinterpreting what already exists.</p>
+            <p>Here, ordinary does not mean average or neutral. It refers to a shared, almost unconscious sense that operates smoothly within everyday life—an indistinct yet reliable contour that supports actions without calling attention to itself. This ordinariness contains an inherent adaptability, remaining open to multiple uses and values without being fixed to a single interpretation.</p>
+            <p>In contemporary Japan, the number of aging condominiums on the secondary market continues to increase. Renovation has become the dominant response, yet many projects remain limited to superficial updates—new finishes, cosmetic “modernization,” or nostalgic references—without questioning the underlying spatial logic of the building stock. This project proposes an alternative: instead of replacing what is perceived as old, it identifies which elements should not be changed, and recalibrates them to function again within present-day life.</p>
+            <p>The design avoids full-scale demolition and reconstruction. Instead, it operates as an upcycling process through three architectural interventions.</p>
+            <p>First, wooden studs were exposed by removing gypsum boards. Unlike contemporary light-gauge steel framing, these studs follow traditional Japanese modules of 303 or 450 millimeters. Treated neither as walls nor as furniture but as linear elements, they create ambiguous boundaries that gently articulate spaces. This approach can be read as a contemporary interpretation of traditional Japanese spatial devices such as shoji screens or latticework.</p>
+            <p>Second, the reinforced concrete structure was returned to its raw state. Japanese RC apartment buildings are typically constructed with high precision, allowing the structural surface itself to function as a finish. By removing wallpaper and tiles and applying minimal repair, the structure is repositioned as a material unique to condominium architecture rather than something to be concealed.</p>
+            <p>Third, large beams—often considered problematic in older buildings—were reinterpreted. By inserting shallow inner eaves beneath them and integrating indirect lighting, the beams become environmental devices that modulate light and perception, rather than obstacles to be hidden.</p>
+            <p>Through these operations, the project achieves a layered spatial quality that goes beyond superficial “Japanese-style” expressions. The method also reduces construction waste to less than half that of a standard renovation. Importantly, this approach is not tied to a specific plan: it offers a transferable strategy applicable to other aging condominiums, suggesting a realistic and sustainable architectural value for Japan’s expanding housing stock.</p>
           </div>
 
           <footer>© THa / Takayuki Hayashi</footer>
@@ -466,28 +516,41 @@
       </div>
     </section>
 
-    <!-- About -->
     <section id="about">
-      <h2 class="section-title">About</h2>
+      <h2 class="section-title">About & Contact</h2>
+      <div class="info-layout">
+        <div class="about-card">
+          <div class="about-name">Takayuki Hayashi</div>
+          <div class="about-role">Architect / THa (Takayuki Hayashi atelier)</div>
+          <div class="about-text">
+            <p>Completed the Master's Program in Human-Environment Studies, Department of Environmental Design, Kyushu University.</p>
+            <p>Currently leading THa, focusing on renovations and architectural reinterpretations that bridge the gap between existing stock and contemporary life.</p>
+          </div>
+        </div>
 
-      <div class="about-card">
-        <div class="about-name">Takayuki Hayashi</div>
-        <div class="about-role">Architect / Takayuki Hayashi atelier</div>
-        <div class="about-text">
-          <p>
-            Completed the Master's Program in Human-Environment Studies,<br>
-            Department of Environmental Design, Kyushu University.
-          </p>
-          <p>
-            Currently working at an architectural design office.
-          </p>
+        <div class="contact-card" id="contact">
+          <div class="contact-title-small">Contact</div>
+          <form class="contact-form" action="https://formspree.io/f/takayukihayashi0412@gmail.com" method="POST">
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" name="name" required>
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" name="_replyto" required>
+            </div>
+            <div class="form-group">
+              <label>Message</label>
+              <textarea name="message" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+          </form>
         </div>
       </div>
     </section>
 
   </div>
 
-  <!-- Modal -->
   <div class="modal" id="modal" aria-hidden="true">
     <div class="modal-inner">
       <div class="modal-close" id="modalClose" aria-label="Close">×</div>
@@ -496,54 +559,39 @@
   </div>
 
   <script>
-    // Slider: auto + click to advance
+    // Slider Logic
     (function () {
       const track = document.getElementById("sliderTrack");
       const slider = document.getElementById("slider");
       if (!track || !slider) return;
-
       const slides = track.children.length;
       let current = 0;
       let paused = false;
-
       function goTo(index) {
         current = (index + slides) % slides;
         track.style.transform = "translateX(-" + (current * 100) + "%)";
       }
-
-      slider.addEventListener("click", function () {
-        goTo(current + 1);
-      });
-
-      slider.addEventListener("mouseenter", function () { paused = true; });
-      slider.addEventListener("mouseleave", function () { paused = false; });
-
-      setInterval(function () {
-        if (!paused && slides > 1) goTo(current + 1);
-      }, 5000);
+      slider.addEventListener("click", () => goTo(current + 1));
+      slider.addEventListener("mouseenter", () => paused = true);
+      slider.addEventListener("mouseleave", () => paused = false);
+      setInterval(() => { if (!paused && slides > 1) goTo(current + 1); }, 5000);
     })();
 
-    // Modal: enlarge plan/process
+    // Modal Logic
     (function () {
       const modal = document.getElementById("modal");
       const modalImg = document.getElementById("modalImg");
       const closeBtn = document.getElementById("modalClose");
-
       function openModal(src, altText) {
         modalImg.src = src;
         modalImg.alt = altText || "";
         modal.classList.add("open");
-        modal.setAttribute("aria-hidden", "false");
         document.body.style.overflow = "hidden";
       }
-
       function closeModal() {
         modal.classList.remove("open");
-        modal.setAttribute("aria-hidden", "true");
-        modalImg.src = "";
         document.body.style.overflow = "";
       }
-
       document.querySelectorAll(".figure").forEach(el => {
         el.addEventListener("click", () => {
           const src = el.getAttribute("data-modal-src");
@@ -551,15 +599,9 @@
           openModal(src, img ? img.alt : "");
         });
       });
-
       closeBtn.addEventListener("click", closeModal);
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) closeModal();
-      });
-
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeModal();
-      });
+      modal.addEventListener("click", (e) => { if (e.target === modal) closeModal(); });
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
     })();
   </script>
 
